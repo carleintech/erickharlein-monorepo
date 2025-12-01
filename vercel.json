@@ -1,7 +1,4 @@
 {
-	"version": 2,
-	"buildCommand": "cd apps/web && pnpm run build",
-	"installCommand": "pnpm install --filter=@erickharlein/web...",
-	"framework": "nextjs",
-	"rootDirectory": "apps/web"
+	"buildCommand": "pnpm turbo run build --filter=@erickharlein/web",
+	"installCommand": "pnpm install"
 }
