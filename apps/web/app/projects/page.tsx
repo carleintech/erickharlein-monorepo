@@ -15,6 +15,22 @@ interface ProjectsPageProps {
 export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
 	const { category, status, search } = searchParams;
 
+	// Check if DATABASE_URL is available
+	if (!process.env.DATABASE_URL) {
+		return (
+			<div className="container py-12">
+				<Card>
+					<CardContent className="py-12 text-center">
+						<h1 className="text-3xl font-bold mb-4">Database Not Connected</h1>
+						<p className="text-muted-foreground">
+							Please configure DATABASE_URL environment variable to view projects.
+						</p>
+					</CardContent>
+				</Card>
+			</div>
+		);
+	}
+
 	// Build filter conditions
 	const where: Prisma.ProjectWhereInput = {
 		visibility: "PUBLIC",
