@@ -28,8 +28,8 @@ export async function generateStaticParams() {
 	}));
 }
 
-// Enable dynamic rendering when DATABASE_URL is not available
-export const dynamic = process.env.DATABASE_URL ? "auto" : "force-dynamic";
+// Use dynamic rendering to handle pages without static generation
+export const dynamicParams = true;
 
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
 	const { slug } = await params;
