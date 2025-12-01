@@ -24,13 +24,12 @@ const ecosystemProducts = [
 		tagline: "Digital cashless ecosystem for Haiti",
 		description:
 			"Complete fintech solution with NFC cards, POS systems, merchant dashboards, and diaspora remittance integration. Building Haiti's digital economy.",
-		status: "Beta",
+		status: "Live",
 		category: "Fintech",
 		gradient: "from-emerald-500 to-teal-500",
 		icon: "💳",
 		links: [
 			{ label: "Visit Website", url: "https://kobklein.com" },
-			{ label: "View Project", url: "/projects/kobklein" },
 		],
 	},
 	{
@@ -39,11 +38,11 @@ const ecosystemProducts = [
 		tagline: "The command center for the entire ecosystem",
 		description:
 			"Unified platform integrating all TechKlein projects, services, and solutions. Central hub for AI governance, fintech, education, defense, and community impact.",
-		status: "Active Development",
+		status: "Live",
 		category: "Platform",
 		gradient: "from-blue-500 to-cyan-500",
 		icon: "🌐",
-		links: [{ label: "View Project", url: "/projects/techklein-platform" }],
+		links: [{ label: "Visit Website", url: "https://techklein.com" }],
 	},
 	{
 		id: "watchlog-ai",
@@ -63,11 +62,11 @@ const ecosystemProducts = [
 		tagline: "Haitian Baccalauréat exam prep platform",
 		description:
 			"Comprehensive study and exam preparation platform for Haitian students. Interactive lessons, practice tests, and progress tracking for academic success.",
-		status: "In Development",
+		status: "Live",
 		category: "Education",
 		gradient: "from-orange-500 to-amber-500",
 		icon: "📚",
-		links: [{ label: "View Project", url: "/projects/baccplus" }],
+		links: [{ label: "Visit Website", url: "https://baccplus.org" }],
 	},
 	{
 		id: "kleinos",
@@ -111,11 +110,11 @@ const ecosystemProducts = [
 		tagline: "Haitian music streaming platform",
 		description:
 			"Streaming platform celebrating Haitian music, from konpa to rap. Supporting artists and preserving cultural heritage through technology.",
-		status: "Planned",
+		status: "Live",
 		category: "Media",
 		gradient: "from-fuchsia-500 to-pink-500",
 		icon: "🎵",
-		links: [{ label: "View Project", url: "/projects/ayitiritmo" }],
+		links: [{ label: "Visit Website", url: "https://ayitiritmo.com" }],
 	},
 	{
 		id: "agi-haiti",
@@ -123,11 +122,23 @@ const ecosystemProducts = [
 		tagline: "Accès Global à la Justice",
 		description:
 			"Digital legal platform connecting Haitians with legal resources, advice, and representation. Making justice accessible to all.",
-		status: "Planned",
+		status: "Live",
 		category: "Government",
 		gradient: "from-slate-500 to-zinc-500",
 		icon: "⚖️",
-		links: [{ label: "View Project", url: "/projects/agi-haiti" }],
+		links: [{ label: "Visit Website", url: "https://agi.com" }],
+	},
+	{
+		id: "haitivote",
+		name: "HaitiVote",
+		tagline: "Democratic voting platform for Haiti",
+		description:
+			"Secure digital voting platform empowering Haitian democracy. Transparent, accessible, and trustworthy election technology for the people.",
+		status: "Live",
+		category: "Government",
+		gradient: "from-blue-500 to-indigo-500",
+		icon: "🗳️",
+		links: [{ label: "Visit Website", url: "https://haitivote.org" }],
 	},
 	{
 		id: "feedhope",
@@ -135,11 +146,11 @@ const ecosystemProducts = [
 		tagline: "Food distribution program for Haiti",
 		description:
 			"Community-driven food distribution initiative leveraging technology to efficiently deliver aid and nutrition support to underserved communities.",
-		status: "Planned",
+		status: "Live",
 		category: "Community",
 		gradient: "from-green-500 to-emerald-500",
 		icon: "🍽️",
-		links: [{ label: "View Project", url: "/projects/feedhope" }],
+		links: [{ label: "Visit Website", url: "https://feedhope.com" }],
 	},
 	{
 		id: "tchatcha509",
@@ -147,11 +158,11 @@ const ecosystemProducts = [
 		tagline: "OfferUp-style marketplace for Haiti",
 		description:
 			"P2P marketplace enabling Haitians to buy, sell, and trade locally. Building Haiti's digital commerce economy.",
-		status: "Planned",
+		status: "Live",
 		category: "E-Commerce",
 		gradient: "from-amber-500 to-yellow-500",
 		icon: "🛒",
-		links: [{ label: "View Project", url: "/projects/tchatcha509" }],
+		links: [{ label: "Visit Website", url: "https://tchatcha509.com" }],
 	},
 	{
 		id: "kleincard",
@@ -183,11 +194,11 @@ const ecosystemProducts = [
 		tagline: "Home healthcare management platform",
 		description:
 			"Complete home care agency management system with client matching, scheduling, billing, and caregiver coordination.",
-		status: "In Development",
+		status: "Live",
 		category: "Healthcare",
 		gradient: "from-rose-500 to-pink-500",
 		icon: "🏥",
-		links: [{ label: "View Project", url: "/projects/caring-compass" }],
+		links: [{ label: "Visit Website", url: "https://caringcompasshomescare.com" }],
 	},
 	{
 		id: "noesis",
