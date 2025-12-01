@@ -1,5 +1,7 @@
 # Erickharlein.com - Production Portfolio Ecosystem
 
+> Professional portfolio and project showcase deployed on Vercel
+
 ## Tech Stack
 - **Frontend**: Next.js 16, React 19, TailwindCSS, TypeScript
 - **Backend**: Next.js API Routes + Node.js
