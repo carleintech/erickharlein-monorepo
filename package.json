@@ -1,0 +1,35 @@
+{
+	"name": "erickharlein-monorepo",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Erickharlein.com - Production Portfolio Ecosystem",
+	"author": "Erick Harlein",
+	"license": "UNLICENSED",
+	"scripts": {
+		"dev": "turbo run dev",
+		"build": "turbo run build",
+		"lint": "biome check .",
+		"lint:fix": "biome check --write .",
+		"format": "biome format --write .",
+		"clean": "turbo run clean && rimraf node_modules pnpm-lock.yaml",
+		"db:generate": "pnpm --filter @erickharlein/database db:generate",
+		"db:migrate": "pnpm --filter @erickharlein/database db:migrate",
+		"db:push": "pnpm --filter @erickharlein/database db:push",
+		"db:seed": "pnpm --filter @erickharlein/database db:seed",
+		"db:studio": "pnpm --filter @erickharlein/database db:studio",
+		"typecheck": "turbo run typecheck"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.2.0",
+		"prettier": "^3.7.3",
+		"rimraf": "^5.0.5",
+		"ts-node": "^10.9.2",
+		"turbo": "^1.13.4",
+		"typescript": "^5.9.3"
+	},
+	"engines": {
+		"node": ">=18.0.0",
+		"pnpm": ">=8.0.0"
+	},
+	"packageManager": "pnpm@8.15.4"
+}

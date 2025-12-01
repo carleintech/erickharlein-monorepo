@@ -1,0 +1,19 @@
+{
+	"extends": "@erickharlein/typescript-config/nextjs.json",
+	"compilerOptions": {
+		"plugins": [
+			{
+				"name": "next"
+			}
+		],
+		"paths": {
+			"@/*": ["./*"],
+			"@erickharlein/database": ["../../packages/database/src"],
+			"@erickharlein/auth": ["../../packages/auth/src"],
+			"@erickharlein/utils": ["../../packages/utils/src"],
+			"@erickharlein/ui": ["../../packages/ui/src"]
+		}
+	},
+	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+	"exclude": ["node_modules"]
+}
