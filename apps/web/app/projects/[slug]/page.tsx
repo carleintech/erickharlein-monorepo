@@ -6,9 +6,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 interface ProjectDetailPageProps {
-	params: {
+	params: Promise<{
 		slug: string;
-	};
+	}>;
 }
 
 export async function generateStaticParams() {
@@ -23,9 +23,10 @@ export async function generateStaticParams() {
 }
 
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
+	const { slug } = await params;
 	const project = await prisma.project.findUnique({
 		where: {
-			slug: params.slug,
+			slug,
 			visibility: "PUBLIC",
 		},
 		include: {
