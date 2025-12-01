@@ -131,7 +131,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
         <CardContent className="pt-6">
           <h2 className="text-2xl font-bold mb-4">Technologies Used</h2>
           <div className="flex flex-wrap gap-2">
-            {project.technologies.map(({ technology }) => (
+            {project.technologies.map(({ technology }: { technology: { id: string; name: string } }) => (
               <Badge key={technology.id} variant="secondary" className="text-sm px-3 py-1">
                 {technology.name}
               </Badge>
