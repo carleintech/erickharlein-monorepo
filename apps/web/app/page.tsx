@@ -1,5 +1,5 @@
-import { HeroSection } from "@/components/hero-section";
 import { ContactCTA } from "@/components/contact-cta";
+import { HeroSection } from "@/components/hero-section";
 
 export default function HomePage() {
 	return (

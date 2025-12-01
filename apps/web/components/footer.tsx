@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 export function Footer() {
 	return (
@@ -10,8 +10,8 @@ export function Footer() {
 			{/* Animated Background Line */}
 			<motion.div
 				className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent"
-				animate={{ x: ['-100%', '100%'] }}
-				transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: 'linear' }}
+				animate={{ x: ["-100%", "100%"] }}
+				transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
 			/>
 
 			<div className="container py-8 relative">
@@ -31,16 +31,28 @@ export function Footer() {
 
 					{/* Quick Links - Horizontal */}
 					<nav className="flex flex-wrap justify-center gap-6 text-sm">
-						<Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">
+						<Link
+							href="/about"
+							className="text-muted-foreground hover:text-primary transition-colors"
+						>
 							About
 						</Link>
-						<Link href="/projects" className="text-muted-foreground hover:text-primary transition-colors">
+						<Link
+							href="/projects"
+							className="text-muted-foreground hover:text-primary transition-colors"
+						>
 							Projects
 						</Link>
-						<Link href="/ecosystem" className="text-muted-foreground hover:text-primary transition-colors">
+						<Link
+							href="/ecosystem"
+							className="text-muted-foreground hover:text-primary transition-colors"
+						>
 							Ecosystem
 						</Link>
-						<Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
+						<Link
+							href="/contact"
+							className="text-muted-foreground hover:text-primary transition-colors"
+						>
 							Contact
 						</Link>
 					</nav>

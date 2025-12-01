@@ -1,13 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Moon, Sun, Menu, X, Sparkles } from "lucide-react";
-import { useTheme } from "next-themes";
 import { Button } from "@erickharlein/ui";
 import { cn } from "@erickharlein/utils";
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { Menu, Moon, Sparkles, Sun, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
+import { useState } from "react";
 
 const navItems = [
 	{ href: "/", label: "Home" },
@@ -34,9 +34,7 @@ export function Navigation() {
 					>
 						<Sparkles className="h-4 w-4 text-white" />
 					</motion.div>
-					<span className="text-xl font-bold text-gradient">
-						TECHKLEIN
-					</span>
+					<span className="text-xl font-bold text-gradient">TECHKLEIN</span>
 				</Link>
 
 				{/* Desktop Navigation */}
@@ -90,11 +88,7 @@ export function Navigation() {
 						className="md:hidden"
 						onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
 					>
-						{mobileMenuOpen ? (
-							<X className="h-5 w-5" />
-						) : (
-							<Menu className="h-5 w-5" />
-						)}
+						{mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
 					</Button>
 				</div>
 			</nav>

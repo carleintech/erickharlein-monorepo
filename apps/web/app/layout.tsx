@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@erickharlein/ui";
-import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
+import { Navigation } from "@/components/navigation";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,13 +12,7 @@ export const metadata: Metadata = {
 	title: "Erickharlein | Systems Engineer & AI Architect",
 	description:
 		"U.S. Navy OS2, Systems Engineer, and AI Architect. Founder of the TechKlein ecosystem.",
-	keywords: [
-		"Systems Engineer",
-		"AI Architect",
-		"U.S. Navy",
-		"TechKlein",
-		"Software Engineering",
-	],
+	keywords: ["Systems Engineer", "AI Architect", "U.S. Navy", "TechKlein", "Software Engineering"],
 	authors: [{ name: "Erickharlein" }],
 	creator: "Erickharlein",
 	openGraph: {
@@ -38,20 +32,11 @@ export const metadata: Metadata = {
 	},
 };
 
-export default function RootLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={inter.className}>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="dark"
-					enableSystem
-					disableTransitionOnChange
-				>
+				<ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
 					<div className="relative min-h-screen flex flex-col">
 						<Navigation />
 						<main className="flex-1">{children}</main>
