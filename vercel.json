@@ -1,5 +1,4 @@
 {
-	"buildCommand": "cd apps/web && pnpm build",
-	"installCommand": "pnpm install",
-	"framework": null
+	"buildCommand": "pnpm turbo run build --filter=@erickharlein/web",
+	"installCommand": "pnpm install"
 }
