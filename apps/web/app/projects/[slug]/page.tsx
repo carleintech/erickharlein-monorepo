@@ -17,7 +17,7 @@ export async function generateStaticParams() {
     select: { slug: true },
   });
 
-  return projects.map((project) => ({
+  return projects.map((project: { slug: string }) => ({
     slug: project.slug,
   }));
 }
