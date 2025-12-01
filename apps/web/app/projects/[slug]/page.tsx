@@ -12,6 +12,12 @@ interface ProjectDetailPageProps {
 }
 
 export async function generateStaticParams() {
+	// Skip static generation during build if DATABASE_URL is not available
+	if (!process.env.DATABASE_URL) {
+		console.warn("DATABASE_URL not set - skipping static generation for project pages");
+		return [];
+	}
+
 	const projects = await prisma.project.findMany({
 		where: { visibility: "PUBLIC" },
 		select: { slug: true },
@@ -21,6 +27,9 @@ export async function generateStaticParams() {
 		slug: project.slug,
 	}));
 }
+
+// Enable dynamic rendering when DATABASE_URL is not available
+export const dynamic = process.env.DATABASE_URL ? "auto" : "force-dynamic";
 
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
 	const { slug } = await params;
