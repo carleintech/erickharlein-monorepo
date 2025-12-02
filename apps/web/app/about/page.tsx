@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@erickharlein/ui";
 import { Code2, Coffee, Globe, GraduationCap, Heart, Music, Plane, Shield } from "lucide-react";
+import Image from "next/image";
 
 export default function AboutPage() {
 	return (
@@ -46,36 +47,56 @@ export default function AboutPage() {
 							From Haiti to the U.S. Navy to building the future
 						</CardDescription>
 					</CardHeader>
-					<CardContent className="space-y-4 text-base leading-relaxed">
-						<p className="text-foreground">
-							I grew up speaking French and Haitian Creole, and when I came to the United States, I
-							had to learn English from scratch. That challenge taught me something fundamental:{" "}
-							<span className="font-semibold">
-								barriers are just problems waiting for solutions.
-							</span>
-						</p>
-						<p className="text-muted-foreground">
-							On June 14, 2021, I enlisted in the U.S. Navy with a clear purpose: to serve, to grow,
-							and to prove that determination matters more than circumstances. I became an
-							Operations Specialist, working in the Combat Information Center aboard USS New Orleans
-							(LPD-18), managing combat systems, navigation, and tactical operations.
-						</p>
-						<p className="text-muted-foreground">
-							But I didn't stop there. While serving full-time, I self-funded my bachelor's degree
-							in Computer Network Engineering and Cybersecurity from the University of Maryland
-							Global Campus. I graduated in December 2023 — all while supporting my wife and our
-							1-year-old son.
-						</p>
-						<p className="text-muted-foreground">
-							Today, I'm pursuing{" "}
-							<span className="font-semibold text-foreground">
-								two master's degrees simultaneously
-							</span>{" "}
-							— one at the Naval Postgraduate School in Applied Computing and another at Western
-							Governors University in Cybersecurity and Information Assurance. My end of service is
-							May 2026, and I'm applying for Officer Candidate School because I joined to lead, not
-							just to serve.
-						</p>
+					<CardContent>
+						<div className="grid md:grid-cols-[300px_1fr] gap-8 items-start">
+							{/* Profile Image */}
+							<div className="relative group">
+								<div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-500" />
+								<div className="relative">
+									<Image
+										src="/images/erickharlein-profile.png"
+										alt="Erickharlein Pierre - U.S. Navy Operations Specialist and Systems Engineer"
+										width={300}
+										height={300}
+										className="rounded-2xl shadow-2xl ring-2 ring-primary/20 object-cover"
+										priority
+									/>
+								</div>
+							</div>
+
+							{/* Story Text */}
+							<div className="space-y-4 text-base leading-relaxed">
+								<p className="text-foreground">
+									I grew up speaking French and Haitian Creole, and when I came to the United States, I
+									had to learn English from scratch. That challenge taught me something fundamental:{" "}
+									<span className="font-semibold">
+										barriers are just problems waiting for solutions.
+									</span>
+								</p>
+								<p className="text-muted-foreground">
+									On June 14, 2021, I enlisted in the U.S. Navy with a clear purpose: to serve, to grow,
+									and to prove that determination matters more than circumstances. I became an
+									Operations Specialist, working in the Combat Information Center aboard USS New Orleans
+									(LPD-18), managing combat systems, navigation, and tactical operations.
+								</p>
+								<p className="text-muted-foreground">
+									But I didn't stop there. While serving full-time, I self-funded my bachelor's degree
+									in Computer Network Engineering and Cybersecurity from the University of Maryland
+									Global Campus. I graduated in December 2023 — all while supporting my wife and our
+									1-year-old son.
+								</p>
+								<p className="text-muted-foreground">
+									Today, I'm pursuing{" "}
+									<span className="font-semibold text-foreground">
+										two master's degrees simultaneously
+									</span>{" "}
+									— one at the Naval Postgraduate School in Applied Computing and another at Western
+									Governors University in Cybersecurity and Information Assurance. My end of service is
+									May 2026, and I'm applying for Officer Candidate School because I joined to lead, not
+									just to serve.
+								</p>
+							</div>
+						</div>
 					</CardContent>
 				</Card>
 
