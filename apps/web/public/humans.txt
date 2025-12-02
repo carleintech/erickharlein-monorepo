@@ -1,0 +1,32 @@
+/* Humans.txt — Because real people build real systems */
+/* Erickharlein.com | © 2025 TechKlein LLC */
+
+/* TEAM */
+Creator: Erickharlein Pierre
+Role: Systems Engineer, AI Architect, Founder of TechKlein
+Website: https://erickharlein.com
+Company: TechKlein LLC
+Company Website: https://techklein.com
+
+/* PROJECT */
+Project: Erickharlein.com Portfolio
+Stack: Next.js, TypeScript, TailwindCSS, pnpm, Prisma, Supabase, Vercel
+Location: Virginia Beach, VA, USA
+Year: 2025
+
+/* CONTRIBUTIONS */
+Design & Architecture: Erickharlein Pierre + KleinAI
+Development: Erickharlein Pierre
+AI Engineering: KleinAI + Ophir
+Legal & Compliance: TechKlein LLC
+
+/* SITE */
+Last Updated: 2025/12/01
+Languages: English, Haitian Creole
+Doctype: HTML5
+Standards: W3C, Accessibility (WCAG 2.1)
+
+/* THANKS */
+Thank you for visiting and respecting our intellectual property.
+All content is protected under U.S. Copyright Law.
+For inquiries: erick@erickharlein.com

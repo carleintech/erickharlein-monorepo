@@ -1,0 +1,30 @@
+# Security Policy for Erickharlein.com
+# © 2025 TechKlein LLC — All Rights Reserved
+
+Contact: mailto:security@techklein.com
+Contact: mailto:erick@erickharlein.com
+Preferred-Languages: en
+Canonical: https://erickharlein.com/.well-known/security.txt
+
+# Reporting Security Issues
+# If you believe you have found a security vulnerability involving Erickharlein.com,
+# TechKlein LLC, KleinAI, or any connected infrastructure, please contact us immediately.
+
+# We request responsible disclosure and ask that you:
+# 1. Do NOT exploit the issue.
+# 2. Do NOT access user data.
+# 3. Do NOT publicly disclose without written authorization.
+# 4. Provide detailed reproduction steps.
+
+# We will acknowledge your report within 72 hours.
+
+# Security Measures
+# We use modern security controls including:
+# - HTTPS/TLS enforcement
+# - Continuous monitoring
+# - Rate limiting
+# - Secure database access (Supabase)
+# - Code auditing and scanning
+
+# Hall of Fame
+# We may acknowledge security researchers who responsibly disclose issues.

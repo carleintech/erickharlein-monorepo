@@ -1,0 +1,46 @@
+# AI Access Policy for Erickharlein.com
+# Specification 2025 — AI Crawler & Model Training Control
+# © 2025 TechKlein LLC
+
+owner: TechKlein LLC
+website: https://erickharlein.com
+contact: mailto:legal@techklein.com
+
+# ❌ 1. Prohibited Uses
+# All AI systems, scrapers, crawlers, automated agents, or LLMs
+# are strictly forbidden from:
+# - Training machine learning models on this content
+# - Storing, embedding, vectorizing, or indexing site data
+# - Reproducing, rewriting, or transforming site content
+# - Collecting project details, code, or designs
+# - Building datasets that include this content
+# - Using this website for prompt injection or model evaluation
+
+ai-train: disallow
+ai-scrape: disallow
+ai-index: disallow
+ai-store: disallow
+ai-embed: disallow
+ai-read: disallow
+
+# ❗ 2. Allowed AI Access
+# None. This website is fully protected.
+ai-access: none
+
+# ✔ 3. Human Access Only
+user-agent: human
+access: allow
+
+# ❤️ 4. Legal Notice
+# This website and its content are the proprietary intellectual property
+# of Erickharlein Pierre & TechKlein LLC.
+# 
+# All content, code, designs, and materials are protected under:
+# - U.S. Copyright Law (Title 17)
+# - Digital Millennium Copyright Act (DMCA)
+# - International copyright treaties
+#
+# Unauthorized AI training, scraping, or data collection is strictly prohibited.
+# Violations may result in legal action including DMCA takedowns and civil litigation.
+#
+# For licensing inquiries: legal@techklein.com
