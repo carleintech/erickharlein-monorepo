@@ -30,6 +30,7 @@ const ecosystemProducts = [
 		icon: "💳",
 		links: [
 			{ label: "Visit Website", url: "https://kobklein.com" },
+			{ label: "View Project", url: "/projects/kobklein" },
 		],
 	},
 	{
@@ -42,7 +43,10 @@ const ecosystemProducts = [
 		category: "Platform",
 		gradient: "from-blue-500 to-cyan-500",
 		icon: "🌐",
-		links: [{ label: "Visit Website", url: "https://techklein.com" }],
+		links: [
+			{ label: "Visit Website", url: "https://techklein.com" },
+			{ label: "View Project", url: "/projects/techklein-platform" },
+		],
 	},
 	{
 		id: "watchlog-ai",
@@ -66,7 +70,10 @@ const ecosystemProducts = [
 		category: "Education",
 		gradient: "from-orange-500 to-amber-500",
 		icon: "📚",
-		links: [{ label: "Visit Website", url: "https://baccplus.org" }],
+		links: [
+			{ label: "Visit Website", url: "https://baccplus.org" },
+			{ label: "View Project", url: "/projects/baccplus" },
+		],
 	},
 	{
 		id: "kleinos",
@@ -114,7 +121,10 @@ const ecosystemProducts = [
 		category: "Media",
 		gradient: "from-fuchsia-500 to-pink-500",
 		icon: "🎵",
-		links: [{ label: "Visit Website", url: "https://ayitiritmo.com" }],
+		links: [
+			{ label: "Visit Website", url: "https://ayitiritmo.com" },
+			{ label: "View Project", url: "/projects/ayitiritmo" },
+		],
 	},
 	{
 		id: "agi-haiti",
@@ -126,7 +136,10 @@ const ecosystemProducts = [
 		category: "Government",
 		gradient: "from-slate-500 to-zinc-500",
 		icon: "⚖️",
-		links: [{ label: "Visit Website", url: "https://agi.com" }],
+		links: [
+			{ label: "Visit Website", url: "https://agi.com" },
+			{ label: "View Project", url: "/projects/agi-haiti" },
+		],
 	},
 	{
 		id: "haitivote",
@@ -138,7 +151,10 @@ const ecosystemProducts = [
 		category: "Government",
 		gradient: "from-blue-500 to-indigo-500",
 		icon: "🗳️",
-		links: [{ label: "Visit Website", url: "https://haitivote.org" }],
+		links: [
+			{ label: "Visit Website", url: "https://haitivote.org" },
+			{ label: "View Project", url: "/projects/haitivote" },
+		],
 	},
 	{
 		id: "feedhope",
@@ -150,7 +166,10 @@ const ecosystemProducts = [
 		category: "Community",
 		gradient: "from-green-500 to-emerald-500",
 		icon: "🍽️",
-		links: [{ label: "Visit Website", url: "https://feedhope.com" }],
+		links: [
+			{ label: "Visit Website", url: "https://feedhope.com" },
+			{ label: "View Project", url: "/projects/feedhope" },
+		],
 	},
 	{
 		id: "tchatcha509",
@@ -162,7 +181,10 @@ const ecosystemProducts = [
 		category: "E-Commerce",
 		gradient: "from-amber-500 to-yellow-500",
 		icon: "🛒",
-		links: [{ label: "Visit Website", url: "https://tchatcha509.com" }],
+		links: [
+			{ label: "Visit Website", url: "https://tchatcha509.com" },
+			{ label: "View Project", url: "/projects/tchatcha509" },
+		],
 	},
 	{
 		id: "kleincard",
@@ -198,7 +220,10 @@ const ecosystemProducts = [
 		category: "Healthcare",
 		gradient: "from-rose-500 to-pink-500",
 		icon: "🏥",
-		links: [{ label: "Visit Website", url: "https://caringcompasshomescare.com" }],
+		links: [
+			{ label: "Visit Website", url: "https://caringcompasshomescare.com" },
+			{ label: "View Project", url: "/projects/caring-compass" },
+		],
 	},
 	{
 		id: "noesis",
