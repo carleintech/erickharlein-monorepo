@@ -91,8 +91,34 @@ export function Footer() {
 				</div>
 
 				{/* Bottom Bar */}
-				<div className="mt-6 pt-6 border-t border-primary/10 text-center text-xs text-muted-foreground">
-					<span>&copy; {new Date().getFullYear()} TechKlein LLC | EIN: 41-2544231</span>
+				<div className="mt-6 pt-6 border-t border-primary/10">
+					{/* Legal Links */}
+					<div className="flex flex-wrap justify-center gap-4 mb-4 text-xs">
+						<Link
+							href="/legal/copyright"
+							className="text-muted-foreground hover:text-primary transition-colors"
+						>
+							Copyright & IP
+						</Link>
+						<span className="text-muted-foreground/30">•</span>
+						<Link
+							href="/legal/privacy-policy"
+							className="text-muted-foreground hover:text-primary transition-colors"
+						>
+							Privacy Policy
+						</Link>
+						<span className="text-muted-foreground/30">•</span>
+						<Link
+							href="/legal/terms"
+							className="text-muted-foreground hover:text-primary transition-colors"
+						>
+							Terms of Service
+						</Link>
+					</div>
+					{/* Copyright */}
+					<div className="text-center text-xs text-muted-foreground">
+						<span>&copy; {new Date().getFullYear()} TechKlein LLC | EIN: 41-2544231</span>
+					</div>
 				</div>
 			</div>
 		</footer>
