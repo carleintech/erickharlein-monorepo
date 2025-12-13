@@ -1,9 +1,9 @@
-import { prisma } from "@erickharlein/database";
 import { Badge, Button, Card, CardContent, Separator } from "@erickharlein/ui";
 import { formatDate } from "@erickharlein/utils";
 import { ArrowLeft, Calendar, ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { projects } from "@/data/projects";
 
 interface ProjectDetailPageProps {
 	params: Promise<{
@@ -12,55 +12,18 @@ interface ProjectDetailPageProps {
 }
 
 export async function generateStaticParams() {
-	// Skip static generation during build if DATABASE_URL is not available or points to localhost
-	if (!process.env.DATABASE_URL || process.env.DATABASE_URL.includes('localhost')) {
-		console.warn("DATABASE_URL not set or points to localhost - skipping static generation for project pages");
-		return [];
-	}
-
-	try {
-		const projects = await prisma.project.findMany({
-			where: { visibility: "PUBLIC" },
-			select: { slug: true },
-		});
-
-		return projects.map((project: { slug: string }) => ({
-			slug: project.slug,
-		}));
-	} catch (error) {
-		console.warn("Failed to fetch projects for static generation:", error);
-		return [];
-	}
+	return projects.map((project) => ({
+		slug: project.slug,
+	}));
 }
-
-// Use dynamic rendering to handle pages without static generation
-export const dynamicParams = true;
 
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
 	const { slug } = await params;
-	const project = await prisma.project.findUnique({
-		where: {
-			slug,
-			visibility: "PUBLIC",
-		},
-		include: {
-			technologies: {
-				include: {
-					technology: true,
-				},
-			},
-		},
-	});
+	const project = projects.find((p) => p.slug === slug);
 
 	if (!project) {
 		notFound();
 	}
-
-	// Increment view count
-	await prisma.project.update({
-		where: { id: project.id },
-		data: { view_count: { increment: 1 } },
-	});
 
 	return (
 		<div className="container py-12 max-w-4xl">
@@ -148,13 +111,11 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 				<CardContent className="pt-6">
 					<h2 className="text-2xl font-bold mb-4">Technologies Used</h2>
 					<div className="flex flex-wrap gap-2">
-						{project.technologies.map(
-							({ technology }: { technology: { id: string; name: string } }) => (
-								<Badge key={technology.id} variant="secondary" className="text-sm px-3 py-1">
-									{technology.name}
-								</Badge>
-							),
-						)}
+						{project.technologies.map((technology) => (
+							<Badge key={technology.id} variant="secondary" className="text-sm px-3 py-1">
+								{technology.name}
+							</Badge>
+						))}
 					</div>
 				</CardContent>
 			</Card>

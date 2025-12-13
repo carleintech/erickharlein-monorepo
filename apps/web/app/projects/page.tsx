@@ -1,8 +1,8 @@
-import { type Prisma, prisma } from "@erickharlein/database";
 import { Card, CardContent } from "@erickharlein/ui";
 import { Suspense } from "react";
 import { ProjectCard } from "@/components/project-card";
 import { ProjectFilters } from "@/components/project-filters";
+import { projects as allProjects } from "@/data/projects";
 
 interface ProjectsPageProps {
 	searchParams: {
@@ -15,68 +15,41 @@ interface ProjectsPageProps {
 export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
 	const { category, status, search } = searchParams;
 
-	// Check if DATABASE_URL is available and not pointing to localhost
-	if (!process.env.DATABASE_URL || process.env.DATABASE_URL.includes('localhost')) {
-		return (
-			<div className="container py-12">
-				<Card>
-					<CardContent className="py-12 text-center">
-						<h1 className="text-3xl font-bold mb-4">Database Not Connected</h1>
-						<p className="text-muted-foreground">
-							Please configure a valid DATABASE_URL environment variable to view projects.
-						</p>
-					</CardContent>
-				</Card>
-			</div>
-		);
-	}
-
-	// Build filter conditions
-	const where: Prisma.ProjectWhereInput = {
-		visibility: "PUBLIC",
-	};
+	// Filter projects based on search params
+	let filteredProjects = [...allProjects];
 
 	if (category) {
-		where.category = { equals: category as never };
+		filteredProjects = filteredProjects.filter((p) => p.category === category);
 	}
 
 	if (status) {
-		where.status = { equals: status as never };
+		filteredProjects = filteredProjects.filter((p) => p.status === status);
 	}
 
 	if (search) {
-		where.OR = [
-			{ title: { contains: search, mode: "insensitive" } },
-			{ description: { contains: search, mode: "insensitive" } },
-			{ tagline: { contains: search, mode: "insensitive" } },
-		];
+		const searchLower = search.toLowerCase();
+		filteredProjects = filteredProjects.filter(
+			(p) =>
+				p.title.toLowerCase().includes(searchLower) ||
+				p.description.toLowerCase().includes(searchLower) ||
+				p.tagline?.toLowerCase().includes(searchLower),
+		);
 	}
 
-	// Fetch projects with filters
-	const projects = await prisma.project.findMany({
-		where,
-		include: {
-			technologies: {
-				include: {
-					technology: true,
-				},
-			},
-		},
-		orderBy: [{ featured: "desc" }, { created_at: "desc" }],
+	// Sort by featured first, then by start date
+	filteredProjects.sort((a, b) => {
+		if (a.featured !== b.featured) {
+			return a.featured ? -1 : 1;
+		}
+		if (a.start_date && b.start_date) {
+			return b.start_date.getTime() - a.start_date.getTime();
+		}
+		return 0;
 	});
 
 	// Get unique categories and statuses for filters
-	const categories = await prisma.project.findMany({
-		where: { visibility: "PUBLIC" },
-		select: { category: true },
-		distinct: ["category"],
-	});
-
-	const statuses = await prisma.project.findMany({
-		where: { visibility: "PUBLIC" },
-		select: { status: true },
-		distinct: ["status"],
-	});
+	const categories = [...new Set(allProjects.map((p) => p.category))];
+	const statuses = [...new Set(allProjects.map((p) => p.status))];
 
 	return (
 		<div className="relative min-h-screen">
@@ -114,8 +87,8 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
 				{/* Filters */}
 				<Suspense fallback={<div>Loading filters...</div>}>
 					<ProjectFilters
-						categories={categories.map((c) => c.category)}
-						statuses={statuses.map((s) => s.status)}
+						categories={categories}
+						statuses={statuses}
 						currentCategory={category}
 						currentStatus={status}
 						currentSearch={search}
@@ -124,7 +97,7 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
 
 				{/* Results */}
 				<div className="mt-8 animate-in fade-in duration-1000 delay-300">
-					{projects.length === 0 ? (
+					{filteredProjects.length === 0 ? (
 						<Card className="glass border-primary/20 shadow-xl">
 							<CardContent className="py-12 text-center">
 								<p className="text-muted-foreground text-lg">
@@ -136,11 +109,11 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
 						<>
 							<div className="mb-6 text-center">
 								<span className="text-sm font-medium px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 dark:from-purple-500/20 dark:to-pink-500/20 border border-purple-500/20 text-foreground">
-									Showing {projects.length} {projects.length === 1 ? "project" : "projects"}
+									Showing {filteredProjects.length} {filteredProjects.length === 1 ? "project" : "projects"}
 								</span>
 							</div>
 							<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-								{projects.map((project, index) => (
+								{filteredProjects.map((project, index) => (
 									<div
 										key={project.id}
 										className="animate-in fade-in slide-in-from-bottom-4 duration-700"

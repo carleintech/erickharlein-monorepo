@@ -1,14 +1,10 @@
 import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle } from "@erickharlein/ui";
-import type { Project, Technology } from "@prisma/client";
 import { ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
+import type { Project } from "@/data/projects";
 
 interface ProjectCardProps {
-	project: Project & {
-		technologies: Array<{
-			technology: Technology;
-		}>;
-	};
+	project: Project;
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
@@ -67,7 +63,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 				<div className="space-y-4">
 					{/* Technologies */}
 					<div className="flex flex-wrap gap-2">
-						{project.technologies.slice(0, 3).map(({ technology }) => (
+						{project.technologies.slice(0, 3).map((technology) => (
 							<Badge
 								key={technology.id}
 								variant="outline"
