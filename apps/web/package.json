@@ -4,7 +4,6 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
-		"prebuild": "cd ../../packages/database && prisma generate",
 		"build": "next build",
 		"start": "next start",
 		"lint": "biome check .",
@@ -12,11 +11,9 @@
 	},
 	"dependencies": {
 		"@erickharlein/auth": "workspace:*",
-		"@erickharlein/database": "workspace:*",
 		"@erickharlein/ui": "workspace:*",
 		"@erickharlein/utils": "workspace:*",
 		"@hookform/resolvers": "^5.2.2",
-		"@prisma/client": "^5.20.0",
 		"@radix-ui/react-avatar": "^1.0.4",
 		"@radix-ui/react-dialog": "^1.0.5",
 		"@radix-ui/react-dropdown-menu": "^2.0.6",

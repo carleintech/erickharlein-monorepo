@@ -1,4 +1,3 @@
-import { prisma } from "@erickharlein/database";
 import { contactFormSchema } from "@erickharlein/utils";
 import { type NextRequest, NextResponse } from "next/server";
 
@@ -9,27 +8,18 @@ export async function POST(request: NextRequest) {
 		// Validate input
 		const validatedData = contactFormSchema.parse(body);
 
-		// Log the contact submission in activity log
-		await prisma.activityLog.create({
-			data: {
-				event_type: "CONTACT_FORM_SUBMISSION",
-				metadata: {
-					name: validatedData.name,
-					email: validatedData.email,
-					phone: validatedData.phone,
-					company: validatedData.company,
-					message_length: validatedData.message.length,
-				},
-				ip_address:
-					request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown",
-				user_agent: request.headers.get("user-agent") || "unknown",
-			},
-		});
+		// Log the contact submission
+		const contactData = {
+			...validatedData,
+			ip_address: request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown",
+			user_agent: request.headers.get("user-agent") || "unknown",
+			timestamp: new Date().toISOString(),
+		};
 
 		// TODO: Send email notification (integrate with SendGrid, Resend, etc.)
-		// For now, we'll just log it
+		// TODO: Store in your preferred system (email, CRM, spreadsheet, etc.)
 
-		console.log("Contact form submission:", validatedData);
+		console.log("Contact form submission:", contactData);
 
 		return NextResponse.json(
 			{
