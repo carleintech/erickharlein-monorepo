@@ -119,7 +119,7 @@ export default function PrivacyPolicyPage() {
 							<ul>
 								<li>Encrypted connections (HTTPS/TLS)</li>
 								<li>Secure hosting infrastructure (Vercel)</li>
-								<li>Database encryption (Supabase/PostgreSQL)</li>
+								<li>Industry-standard encryption protocols</li>
 								<li>Regular security audits</li>
 								<li>Access controls and authentication</li>
 							</ul>
@@ -169,18 +169,6 @@ export default function PrivacyPolicyPage() {
 										className="text-primary"
 									>
 										Vercel Privacy Policy
-									</a>
-								</li>
-								<li>
-									<strong>Supabase:</strong> Database and authentication
-									<br />
-									<a
-										href="https://supabase.com/privacy"
-										target="_blank"
-										rel="noopener noreferrer"
-										className="text-primary"
-									>
-										Supabase Privacy Policy
 									</a>
 								</li>
 								<li>
@@ -342,3 +330,4 @@ export default function PrivacyPolicyPage() {
 		</div>
 	);
 }
+
