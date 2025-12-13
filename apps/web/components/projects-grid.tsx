@@ -1,19 +1,13 @@
 "use client";
 
 import { Badge, Card, CardContent, CardDescription, CardHeader, CardTitle } from "@erickharlein/ui";
-import type { Project, Technology } from "@prisma/client";
 import { motion } from "framer-motion";
 import { Calendar, ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
-
-interface ProjectWithTechnologies extends Project {
-	technologies: Array<{
-		technology: Technology;
-	}>;
-}
+import type { Project } from "@/data/projects";
 
 interface ProjectsGridProps {
-	projects: ProjectWithTechnologies[];
+	projects: Project[];
 }
 
 const containerVariants = {
@@ -106,11 +100,11 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
 
 										{/* Technologies */}
 										<div className="flex flex-wrap gap-2">
-											{project.technologies.slice(0, 3).map(({ technology }) => (
-												<span
-													key={technology.id}
-													className="text-xs px-2 py-1 rounded-md bg-secondary/50 text-secondary-foreground border border-secondary"
-												>
+										{project.technologies.slice(0, 3).map((technology) => (
+											<span
+												key={technology.id}
+												className="text-xs px-2 py-1 rounded-md bg-secondary/50 text-secondary-foreground border border-secondary"
+											>
 													{technology.name}
 												</span>
 											))}

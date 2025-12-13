@@ -37,7 +37,7 @@ const expertise = [
 		icon: Database,
 		title: "Data Engineering",
 		description: "Scalable data pipelines, real-time processing, and analytics.",
-		skills: ["Prisma", "Supabase", "Redis", "Kafka", "ETL"],
+		skills: ["PostgreSQL", "MongoDB", "Redis", "Kafka", "ETL"],
 		color: "from-green-500 to-emerald-500",
 	},
 	{

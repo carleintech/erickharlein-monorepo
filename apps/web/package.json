@@ -10,7 +10,6 @@
 		"format": "biome format --write ."
 	},
 	"dependencies": {
-		"@erickharlein/auth": "workspace:*",
 		"@erickharlein/ui": "workspace:*",
 		"@erickharlein/utils": "workspace:*",
 		"@hookform/resolvers": "^5.2.2",
@@ -22,7 +21,6 @@
 		"@radix-ui/react-separator": "^1.0.3",
 		"@radix-ui/react-slot": "^1.0.2",
 		"@radix-ui/react-toast": "^1.1.5",
-		"@supabase/supabase-js": "^2.39.7",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.0",
 		"date-fns": "^3.3.1",
