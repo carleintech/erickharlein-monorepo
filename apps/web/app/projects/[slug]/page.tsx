@@ -12,20 +12,25 @@ interface ProjectDetailPageProps {
 }
 
 export async function generateStaticParams() {
-	// Skip static generation during build if DATABASE_URL is not available
-	if (!process.env.DATABASE_URL) {
-		console.warn("DATABASE_URL not set - skipping static generation for project pages");
+	// Skip static generation during build if DATABASE_URL is not available or points to localhost
+	if (!process.env.DATABASE_URL || process.env.DATABASE_URL.includes('localhost')) {
+		console.warn("DATABASE_URL not set or points to localhost - skipping static generation for project pages");
 		return [];
 	}
 
-	const projects = await prisma.project.findMany({
-		where: { visibility: "PUBLIC" },
-		select: { slug: true },
-	});
+	try {
+		const projects = await prisma.project.findMany({
+			where: { visibility: "PUBLIC" },
+			select: { slug: true },
+		});
 
-	return projects.map((project: { slug: string }) => ({
-		slug: project.slug,
-	}));
+		return projects.map((project: { slug: string }) => ({
+			slug: project.slug,
+		}));
+	} catch (error) {
+		console.warn("Failed to fetch projects for static generation:", error);
+		return [];
+	}
 }
 
 // Use dynamic rendering to handle pages without static generation

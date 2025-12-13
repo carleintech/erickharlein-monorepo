@@ -60,6 +60,7 @@ export default function AboutPage() {
 										height={300}
 										className="rounded-2xl shadow-2xl ring-2 ring-primary/20 object-cover"
 										priority
+										unoptimized
 									/>
 								</div>
 							</div>
