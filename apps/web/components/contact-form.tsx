@@ -3,7 +3,8 @@
 import { Button, Input, Label, Textarea, useToast } from "@erickharlein/ui";
 import { type ContactFormData, contactFormSchema } from "@erickharlein/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
+import { Loader2, Send, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -52,51 +53,117 @@ export function ContactForm() {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-			<div className="space-y-2">
-				<Label htmlFor="name">Name *</Label>
-				<Input id="name" {...register("name")} placeholder="Your name" />
-				{errors.name && <p className="text-sm text-destructive">{errors.name.message}</p>}
+		<form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+			<div className="grid md:grid-cols-2 gap-6">
+				<motion.div
+					initial={{ opacity: 0, y: 10 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ delay: 0.1 }}
+					className="space-y-2"
+				>
+					<Label htmlFor="name" className="text-base font-semibold">Name *</Label>
+					<Input
+						id="name"
+						{...register("name")}
+						placeholder="John Doe"
+						className="h-12 bg-zinc-900/50 border-zinc-800 focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+					/>
+					{errors.name && <p className="text-sm text-red-400 flex items-center gap-1 mt-1">⚠️ {errors.name.message}</p>}
+				</motion.div>
+
+				<motion.div
+					initial={{ opacity: 0, y: 10 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ delay: 0.15 }}
+					className="space-y-2"
+				>
+					<Label htmlFor="email" className="text-base font-semibold">Email *</Label>
+					<Input
+						id="email"
+						type="email"
+						{...register("email")}
+						placeholder="john@example.com"
+						className="h-12 bg-zinc-900/50 border-zinc-800 focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+					/>
+					{errors.email && <p className="text-sm text-red-400 flex items-center gap-1 mt-1">⚠️ {errors.email.message}</p>}
+				</motion.div>
 			</div>
 
-			<div className="space-y-2">
-				<Label htmlFor="email">Email *</Label>
-				<Input
-					id="email"
-					type="email"
-					{...register("email")}
-					placeholder="your.email@example.com"
-				/>
-				{errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
+			<div className="grid md:grid-cols-2 gap-6">
+				<motion.div
+					initial={{ opacity: 0, y: 10 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ delay: 0.2 }}
+					className="space-y-2"
+				>
+					<Label htmlFor="phone" className="text-base font-semibold">Phone</Label>
+					<Input
+						id="phone"
+						{...register("phone")}
+						placeholder="+1 (555) 000-0000"
+						className="h-12 bg-zinc-900/50 border-zinc-800 focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+					/>
+					{errors.phone && <p className="text-sm text-red-400 flex items-center gap-1 mt-1">⚠️ {errors.phone.message}</p>}
+				</motion.div>
+
+				<motion.div
+					initial={{ opacity: 0, y: 10 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ delay: 0.25 }}
+					className="space-y-2"
+				>
+					<Label htmlFor="company" className="text-base font-semibold">Company</Label>
+					<Input
+						id="company"
+						{...register("company")}
+						placeholder="Your company name"
+						className="h-12 bg-zinc-900/50 border-zinc-800 focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+					/>
+					{errors.company && <p className="text-sm text-red-400 flex items-center gap-1 mt-1">⚠️ {errors.company.message}</p>}
+				</motion.div>
 			</div>
 
-			<div className="space-y-2">
-				<Label htmlFor="phone">Phone</Label>
-				<Input id="phone" {...register("phone")} placeholder="+1 (555) 000-0000" />
-				{errors.phone && <p className="text-sm text-destructive">{errors.phone.message}</p>}
-			</div>
-
-			<div className="space-y-2">
-				<Label htmlFor="company">Company</Label>
-				<Input id="company" {...register("company")} placeholder="Your company name" />
-				{errors.company && <p className="text-sm text-destructive">{errors.company.message}</p>}
-			</div>
-
-			<div className="space-y-2">
-				<Label htmlFor="message">Message *</Label>
+			<motion.div
+				initial={{ opacity: 0, y: 10 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ delay: 0.3 }}
+				className="space-y-2"
+			>
+				<Label htmlFor="message" className="text-base font-semibold">Message *</Label>
 				<Textarea
 					id="message"
 					{...register("message")}
 					placeholder="Tell me about your project or inquiry..."
-					rows={5}
+					rows={6}
+					className="bg-zinc-900/50 border-zinc-800 focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 transition-all resize-none"
 				/>
-				{errors.message && <p className="text-sm text-destructive">{errors.message.message}</p>}
-			</div>
+				{errors.message && <p className="text-sm text-red-400 flex items-center gap-1 mt-1">⚠️ {errors.message.message}</p>}
+			</motion.div>
 
-			<Button type="submit" className="w-full" disabled={isSubmitting}>
-				{isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-				{isSubmitting ? "Sending..." : "Send Message"}
-			</Button>
+			<motion.div
+				initial={{ opacity: 0, y: 10 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ delay: 0.35 }}
+			>
+				<Button
+					type="submit"
+					className="w-full h-14 text-base font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all duration-300 group"
+					disabled={isSubmitting}
+				>
+					{isSubmitting ? (
+						<>
+							<Loader2 className="mr-2 h-5 w-5 animate-spin" />
+							Sending...
+						</>
+					) : (
+						<>
+							<Send className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+							Send Message
+							<Sparkles className="ml-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
+						</>
+					)}
+				</Button>
+			</motion.div>
 		</form>
 	);
 }

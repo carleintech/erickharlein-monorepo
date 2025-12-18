@@ -5,15 +5,15 @@ import { ProjectFilters } from "@/components/project-filters";
 import { projects as allProjects } from "@/data/projects";
 
 interface ProjectsPageProps {
-	searchParams: {
+	searchParams: Promise<{
 		category?: string;
 		status?: string;
 		search?: string;
-	};
+	}>;
 }
 
 export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
-	const { category, status, search } = searchParams;
+	const { category, status, search } = await searchParams;
 
 	// Filter projects based on search params
 	let filteredProjects = [...allProjects];
@@ -76,11 +76,11 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
 				{/* Header */}
 				<div className="space-y-4 mb-12 text-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
 					<h1 className="text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 dark:from-purple-400 dark:via-pink-400 dark:to-rose-400 bg-clip-text text-transparent">
-						Projects
+						Our Products & Solutions
 					</h1>
 					<p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-						A showcase of systems, platforms, and solutions I've built across AI, fintech,
-						government, and community impact.
+						17+ live products serving millions — from defense operations to financial inclusion,
+						education to cultural preservation. Each solution designed to solve real problems and create lasting impact.
 					</p>
 				</div>
 

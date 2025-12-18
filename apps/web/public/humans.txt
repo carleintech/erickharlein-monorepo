@@ -29,4 +29,4 @@ Standards: W3C, Accessibility (WCAG 2.1)
 /* THANKS */
 Thank you for visiting and respecting our intellectual property.
 All content is protected under U.S. Copyright Law.
-For inquiries: erick@erickharlein.com
+For inquiries: erickharleinp@gmail.com

@@ -60,7 +60,7 @@ export function Footer() {
 					{/* Connect */}
 					<div className="flex gap-3">
 						<motion.a
-							href="https://github.com/erickharlein"
+						href="https://github.com/carleintech"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="glass p-2 rounded-lg text-muted-foreground hover:text-primary transition-all"
@@ -70,7 +70,7 @@ export function Footer() {
 							<Github className="h-4 w-4" />
 						</motion.a>
 						<motion.a
-							href="https://linkedin.com/in/erickharlein"
+						href="https://linkedin.com/in/carleintech"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="glass p-2 rounded-lg text-muted-foreground hover:text-primary transition-all"
@@ -80,7 +80,7 @@ export function Footer() {
 							<Linkedin className="h-4 w-4" />
 						</motion.a>
 						<motion.a
-							href="mailto:erick@erickharlein.com"
+						href="mailto:erickharleinp@gmail.com"
 							className="glass p-2 rounded-lg text-muted-foreground hover:text-primary transition-all"
 							whileHover={{ scale: 1.1, y: -2 }}
 							whileTap={{ scale: 0.95 }}

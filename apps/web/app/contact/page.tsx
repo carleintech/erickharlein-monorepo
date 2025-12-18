@@ -1,182 +1,333 @@
+"use client";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@erickharlein/ui";
-import { Github, Linkedin, Mail, MapPin, MessageSquare, Phone, Send, Sparkles } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, MessageSquare, Phone, Send, Sparkles, Zap, Clock, Globe2 } from "lucide-react";
 import { ContactForm } from "@/components/contact-form";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function ContactPage() {
 	return (
-		<div className="relative min-h-screen">
-			{/* Animated Background */}
-			<div className="fixed inset-0 -z-10 overflow-hidden">
-				<div
-					className="absolute top-20 right-10 h-96 w-96 rounded-full bg-gradient-to-br from-blue-500/30 to-cyan-500/30 blur-3xl animate-pulse"
-					style={{ animationDuration: "4s" }}
+		<div className="relative min-h-screen overflow-hidden">
+			{/* Enhanced Animated Background */}
+			<div className="fixed inset-0 -z-10">
+				{/* Grid Pattern */}
+				<div className="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+				
+				{/* Animated Gradient Orbs */}
+				<motion.div
+					className="absolute top-20 right-10 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-blue-500/40 to-cyan-500/40 blur-3xl"
+					animate={{
+						x: [0, 50, 0],
+						y: [0, 30, 0],
+						scale: [1, 1.1, 1],
+					}}
+					transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
 				/>
-				<div
-					className="absolute bottom-20 left-10 h-96 w-96 rounded-full bg-gradient-to-br from-purple-500/30 to-pink-500/30 blur-3xl animate-pulse"
-					style={{ animationDuration: "6s" }}
+				<motion.div
+					className="absolute bottom-20 left-10 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-purple-500/40 to-pink-500/40 blur-3xl"
+					animate={{
+						x: [0, -50, 0],
+						y: [0, 50, 0],
+						scale: [1, 1.2, 1],
+					}}
+					transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
 				/>
-				<div
-					className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-gradient-to-br from-indigo-500/20 to-violet-500/20 blur-3xl animate-pulse"
-					style={{ animationDuration: "5s" }}
+				<motion.div
+					className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-gradient-to-br from-indigo-500/30 to-violet-500/30 blur-3xl"
+					animate={{
+						rotate: [0, 180, 360],
+						scale: [1, 1.1, 1],
+					}}
+					transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
 				/>
+				
+				{/* Floating Particles */}
+				{Array.from({ length: 15 }).map((_, i) => (
+					<motion.div
+						key={i}
+						className="absolute w-1 h-1 rounded-full bg-blue-400/30"
+						style={{
+							left: `${Math.random() * 100}%`,
+							top: `${Math.random() * 100}%`,
+						}}
+						animate={{
+							y: [0, -30, 0],
+							opacity: [0.3, 0.8, 0.3],
+						}}
+						transition={{
+							duration: 3 + Math.random() * 2,
+							repeat: Infinity,
+							delay: Math.random() * 2,
+						}}
+					/>
+				))}
 			</div>
 
-			<div className="container py-12 max-w-5xl">
-				{/* Header */}
-				<div className="space-y-6 mb-12 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
-					<div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30 backdrop-blur-sm">
-						<Send className="h-4 w-4 text-blue-400" />
-						<span className="text-sm font-medium text-blue-300">Let's Connect</span>
-					</div>
-					<h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white via-blue-200 to-cyan-200 bg-clip-text text-transparent">
-						Get in Touch
-					</h1>
-					<p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-						Have a question or want to work together? I'd love to hear from you.
-					</p>
-				</div>
-
-				<div className="grid md:grid-cols-2 gap-8">
-					{/* Contact Information */}
-					<div className="space-y-6">
-						<Card
-							className="glass hover:scale-[1.01] transition-all duration-300 animate-in fade-in slide-in-from-bottom-4"
-							style={{ animationDelay: "200ms" }}
+			<div className="container py-16 max-w-7xl">
+				{/* Enhanced Header */}
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.8 }}
+					className="space-y-8 mb-16 text-center"
+				>
+					<motion.div
+						initial={{ scale: 0.9 }}
+						animate={{ scale: 1 }}
+						className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20 border border-blue-500/30 backdrop-blur-sm shadow-lg shadow-blue-500/10"
+					>
+						<motion.div
+							animate={{ rotate: [0, 360] }}
+							transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
 						>
-							<div className="h-1 bg-gradient-to-r from-blue-500 to-cyan-500" />
-							<CardHeader>
-								<CardTitle className="text-2xl">Contact Information</CardTitle>
-								<CardDescription>
-									Feel free to reach out through any of these channels
-								</CardDescription>
-							</CardHeader>
+							<Send className="h-5 w-5 text-blue-400" />
+						</motion.div>
+						<span className="text-sm font-bold tracking-wider text-blue-200 uppercase">Let's Connect</span>
+					</motion.div>
+					
+					<motion.h1
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: 0.2 }}
+						className="text-6xl md:text-8xl font-black"
+					>
+						<span className="block bg-gradient-to-r from-white via-blue-200 to-cyan-200 bg-clip-text text-transparent">
+							Get in Touch
+						</span>
+					</motion.h1>
+					
+					<motion.p
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						transition={{ delay: 0.4 }}
+						className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light"
+					>
+						Have a question or want to work together?
+						<span className="block mt-2 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
+							I'd love to hear from you.
+						</span>
+					</motion.p>
+					
+					{/* Quick Stats */}
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: 0.6 }}
+						className="flex flex-wrap justify-center gap-6 pt-4"
+					>
+						<div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-green-500/10 border border-green-500/20">
+							<div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+							<span className="text-sm text-green-300 font-semibold">Available Now</span>
+						</div>
+						<div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-500/10 border border-blue-500/20">
+							<Clock className="w-4 h-4 text-blue-400" />
+							<span className="text-sm text-blue-300">24-48h Response</span>
+						</div>
+						<div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-500/10 border border-purple-500/20">
+							<Globe2 className="w-4 h-4 text-purple-400" />
+							<span className="text-sm text-purple-300">Global Projects</span>
+						</div>
+					</motion.div>
+				</motion.div>
+
+				<div className="grid lg:grid-cols-5 gap-8">
+					{/* Contact Information - 2 columns */}
+					<div className="lg:col-span-2 space-y-6">
+						<motion.div
+							initial={{ opacity: 0, x: -20 }}
+							animate={{ opacity: 1, x: 0 }}
+							transition={{ delay: 0.2 }}
+						>
+							<Card className="glass group hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-500 relative overflow-hidden">
+								<div className="h-1.5 bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-500 animate-gradient" />
+								<CardHeader>
+									<div className="flex items-center gap-3 mb-2">
+										<motion.div
+											animate={{ rotate: [0, 10, -10, 0] }}
+											transition={{ duration: 2, repeat: Infinity }}
+										>
+											<Zap className="w-6 h-6 text-blue-400" />
+										</motion.div>
+										<CardTitle className="text-3xl bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Contact Info</CardTitle>
+									</div>
+									<CardDescription className="text-base">
+										Reach out through any channel
+									</CardDescription>
+								</CardHeader>
 							<CardContent className="space-y-6">
-								<a
-									href="mailto:erick@erickharlein.com"
-									className="flex items-start gap-4 group hover:scale-[1.02] transition-all duration-300"
-								>
-									<div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 group-hover:scale-110 transition-transform">
-										<Mail className="h-6 w-6 text-white" />
-									</div>
-									<div className="flex-1">
-										<div className="font-semibold text-foreground group-hover:text-blue-400 transition-colors">
-											Email
+									<motion.a
+										href="mailto:erickharleinp@gmail.com"
+										whileHover={{ scale: 1.02, x: 5 }}
+										className="flex items-start gap-4 p-3 rounded-xl hover:bg-blue-500/5 transition-colors group"
+									>
+										<motion.div
+											whileHover={{ rotate: 12 }}
+											className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/30"
+										>
+											<Mail className="h-7 w-7 text-white" />
+										</motion.div>
+										<div className="flex-1">
+											<div className="font-bold text-lg text-foreground group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-cyan-400 group-hover:bg-clip-text group-hover:text-transparent transition-all">
+												Email
+											</div>
+											<div className="text-sm text-muted-foreground group-hover:text-blue-300 transition-colors">erickharleinp@gmail.com</div>
 										</div>
-										<div className="text-sm text-muted-foreground">erick@erickharlein.com</div>
-									</div>
-								</a>
+									</motion.a>
 
-								<a
-									href="https://wa.me/15551234567"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="flex items-start gap-4 group hover:scale-[1.02] transition-all duration-300"
-								>
-									<div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 group-hover:scale-110 transition-transform">
-										<MessageSquare className="h-6 w-6 text-white" />
-									</div>
-									<div className="flex-1">
-										<div className="font-semibold text-foreground group-hover:text-green-400 transition-colors">
-											WhatsApp
+<motion.a
+										href="https://wa.me/18508610959"
+										target="_blank"
+										rel="noopener noreferrer"
+										whileHover={{ scale: 1.02, x: 5 }}
+										className="flex items-start gap-4 p-3 rounded-xl hover:bg-green-500/5 transition-colors group"
+									>
+										<motion.div
+											whileHover={{ rotate: -12 }}
+											className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 shadow-lg shadow-green-500/30"
+										>
+											<MessageSquare className="h-7 w-7 text-white" />
+										</motion.div>
+										<div className="flex-1">
+											<div className="font-bold text-lg text-foreground group-hover:bg-gradient-to-r group-hover:from-green-400 group-hover:to-emerald-400 group-hover:bg-clip-text group-hover:text-transparent transition-all">
+												WhatsApp
+											</div>
+											<div className="text-sm text-muted-foreground group-hover:text-green-300 transition-colors">Quick chat available</div>
 										</div>
-										<div className="text-sm text-muted-foreground">Quick chat available</div>
-									</div>
-								</a>
+									</motion.a>
 
-								<div className="flex items-start gap-4">
-									<div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500">
-										<MapPin className="h-6 w-6 text-white" />
+									<div className="flex items-start gap-4 p-3 rounded-xl">
+										<div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg shadow-purple-500/30">
+											<MapPin className="h-7 w-7 text-white" />
+										</div>
+										<div className="flex-1">
+											<div className="font-bold text-lg text-foreground">Location</div>
+											<div className="text-sm text-muted-foreground">United States</div>
+										</div>
 									</div>
-									<div className="flex-1">
-										<div className="font-semibold text-foreground">Location</div>
-										<div className="text-sm text-muted-foreground">United States</div>
-									</div>
-								</div>
 
-								<div className="flex items-start gap-4">
-									<div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500">
-										<Phone className="h-6 w-6 text-white" />
-									</div>
-									<div className="flex-1">
-										<div className="font-semibold text-foreground">Response Time</div>
+									<div className="flex items-start gap-4 p-3 rounded-xl">
+										<div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-500 shadow-lg shadow-indigo-500/30">
+											<Clock className="h-7 w-7 text-white" />
+										</div>
+										<div className="flex-1">
+											<div className="font-bold text-lg text-foreground">Response Time</div>
 										<div className="text-sm text-muted-foreground">Usually within 24-48 hours</div>
 									</div>
 								</div>
 							</CardContent>
-						</Card>
+								</Card>
+							</motion.div>
 
-						<Card
-							className="glass hover:scale-[1.01] transition-all duration-300 animate-in fade-in slide-in-from-bottom-4"
-							style={{ animationDelay: "400ms" }}
-						>
-							<div className="h-1 bg-gradient-to-r from-purple-500 to-pink-500" />
-							<CardHeader>
-								<CardTitle className="text-2xl">Social & Professional</CardTitle>
-								<CardDescription>Connect with me on these platforms</CardDescription>
-							</CardHeader>
+							<motion.div
+								initial={{ opacity: 0, x: -20 }}
+								animate={{ opacity: 1, x: 0 }}
+								transition={{ delay: 0.4 }}
+							>
+								<Card className="glass group hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-500">
+									<div className="h-1.5 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 animate-gradient" />
+									<CardHeader>
+										<CardTitle className="text-2xl bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Social Links</CardTitle>
+										<CardDescription className="text-base">Connect on these platforms</CardDescription>
+									</CardHeader>
 							<CardContent className="space-y-4">
-								<a
-									href="https://github.com/erickharlein"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="flex items-center gap-4 group hover:scale-[1.02] transition-all duration-300"
-								>
-									<div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-slate-700 to-slate-900 group-hover:scale-110 transition-transform">
-										<Github className="h-5 w-5 text-white" />
-									</div>
-									<span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-										github.com/erickharlein
-									</span>
-								</a>
-								<a
-									href="https://linkedin.com/in/erickharlein"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="flex items-center gap-4 group hover:scale-[1.02] transition-all duration-300"
-								>
-									<div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-blue-800 group-hover:scale-110 transition-transform">
-										<Linkedin className="h-5 w-5 text-white" />
-									</div>
-									<span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-										linkedin.com/in/erickharlein
-									</span>
-								</a>
+									<motion.a
+										href="https://github.com/carleintech"
+										target="_blank"
+										rel="noopener noreferrer"
+										whileHover={{ scale: 1.03, x: 5 }}
+										className="flex items-center gap-4 p-3 rounded-xl hover:bg-slate-500/10 transition-colors group"
+									>
+										<motion.div
+											whileHover={{ rotate: 360 }}
+											transition={{ duration: 0.5 }}
+											className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-slate-700 to-slate-900 shadow-lg"
+										>
+											<Github className="h-6 w-6 text-white" />
+										</motion.div>
+										<span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
+											github.com/carleintech
+										</span>
+									</motion.a>
+									<motion.a
+										href="https://linkedin.com/in/carleintech"
+										target="_blank"
+										rel="noopener noreferrer"
+										whileHover={{ scale: 1.03, x: 5 }}
+										className="flex items-center gap-4 p-3 rounded-xl hover:bg-blue-500/10 transition-colors group"
+									>
+										<motion.div
+											whileHover={{ rotate: 360 }}
+											transition={{ duration: 0.5 }}
+											className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 shadow-lg"
+										>
+											<Linkedin className="h-6 w-6 text-white" />
+										</motion.div>
+										<span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
+											linkedin.com/in/carleintech
+										</span>
+									</motion.a>
 							</CardContent>
-						</Card>
+								</Card>
+							</motion.div>
 
-						<Card
-							className="glass-strong border-2 border-indigo-500/30 animate-in fade-in slide-in-from-bottom-4"
-							style={{ animationDelay: "600ms" }}
-						>
-							<CardContent className="pt-6 space-y-3">
-								<div className="flex items-center gap-2 text-indigo-400">
-									<Sparkles className="h-5 w-5" />
-									<strong className="text-foreground">Looking for consultation?</strong>
-								</div>
-								<p className="text-sm text-muted-foreground leading-relaxed">
-									Consider booking a dedicated time slot for a more structured discussion about your
-									project needs. I'm here to help bring your ideas to life.
-								</p>
-							</CardContent>
-						</Card>
+							<motion.div
+								initial={{ opacity: 0, y: 20 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ delay: 0.6 }}
+							>
+								<Card className="relative overflow-hidden group hover:shadow-2xl hover:shadow-indigo-500/30 transition-all duration-500">
+									<div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10 group-hover:from-indigo-500/20 group-hover:via-purple-500/20 group-hover:to-pink-500/20 transition-all" />
+									<CardContent className="relative pt-6 space-y-3">
+										<div className="flex items-center gap-3">
+											<motion.div
+												animate={{ rotate: [0, 360] }}
+												transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+											>
+												<Sparkles className="h-6 w-6 text-indigo-400" />
+											</motion.div>
+											<strong className="text-lg bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">Looking for consultation?</strong>
+										</div>
+										<p className="text-sm text-muted-foreground leading-relaxed">
+											Consider booking a dedicated time slot for a more structured discussion about your
+											project needs. I'm here to help bring your ideas to life.
+										</p>
+									</CardContent>
+								</Card>
+							</motion.div>
 					</div>
 
-					{/* Contact Form */}
-					<div
-						className="animate-in fade-in slide-in-from-bottom-4"
-						style={{ animationDelay: "800ms" }}
+					{/* Contact Form - 3 columns */}
+					<motion.div
+						className="lg:col-span-3"
+						initial={{ opacity: 0, x: 20 }}
+						animate={{ opacity: 1, x: 0 }}
+						transition={{ delay: 0.3 }}
 					>
-						<Card className="glass hover:shadow-2xl transition-all duration-300">
-							<div className="h-1 bg-gradient-to-r from-indigo-500 to-purple-500" />
-							<CardHeader>
-								<CardTitle className="text-2xl">Send a Message</CardTitle>
-								<CardDescription>I'll get back to you as soon as possible</CardDescription>
+						<Card className="glass group hover:shadow-2xl hover:shadow-indigo-500/20 transition-all duration-500 relative overflow-hidden">
+							{/* Animated top bar */}
+							<div className="h-1.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-gradient" />
+							
+							{/* Subtle glow effect */}
+							<div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+							
+							<CardHeader className="relative">
+								<div className="flex items-center gap-3 mb-2">
+									<motion.div
+										animate={{ scale: [1, 1.2, 1] }}
+										transition={{ duration: 2, repeat: Infinity }}
+									>
+										<Send className="w-7 h-7 text-indigo-400" />
+									</motion.div>
+									<CardTitle className="text-4xl bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Send a Message</CardTitle>
+								</div>
+								<CardDescription className="text-base">I'll get back to you as soon as possible</CardDescription>
 							</CardHeader>
-							<CardContent>
+							<CardContent className="relative">
 								<ContactForm />
 							</CardContent>
 						</Card>
-					</div>
+					</motion.div>
 				</div>
 			</div>
 		</div>

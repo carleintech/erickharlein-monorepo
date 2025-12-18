@@ -2,7 +2,7 @@
 # © 2025 TechKlein LLC — All Rights Reserved
 
 Contact: mailto:security@techklein.com
-Contact: mailto:erick@erickharlein.com
+Contact: mailto:erickharleinp@gmail.com
 Preferred-Languages: en
 Canonical: https://erickharlein.com/.well-known/security.txt
 

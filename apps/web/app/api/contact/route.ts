@@ -16,8 +16,47 @@ export async function POST(request: NextRequest) {
 			timestamp: new Date().toISOString(),
 		};
 
-		// TODO: Send email notification (integrate with SendGrid, Resend, etc.)
-		// TODO: Store in your preferred system (email, CRM, spreadsheet, etc.)
+		// Send email notification
+		try {
+			// Using Resend API (free tier: 100 emails/day)
+			const resendApiKey = process.env.RESEND_API_KEY;
+			
+			if (resendApiKey) {
+				const emailResponse = await fetch("https://api.resend.com/emails", {
+					method: "POST",
+					headers: {
+						"Authorization": `Bearer ${resendApiKey}`,
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						from: "Portfolio Contact <onboarding@resend.dev>",
+						to: ["erickharleinp@gmail.com"],
+						subject: `New Contact Form Submission from ${validatedData.name}`,
+						html: `
+							<h2>New Contact Form Submission</h2>
+							<p><strong>Name:</strong> ${validatedData.name}</p>
+							<p><strong>Email:</strong> ${validatedData.email}</p>
+							${validatedData.phone ? `<p><strong>Phone:</strong> ${validatedData.phone}</p>` : ""}
+							${validatedData.company ? `<p><strong>Company:</strong> ${validatedData.company}</p>` : ""}
+							<p><strong>Message:</strong></p>
+							<p>${validatedData.message.replace(/\n/g, "<br>")}</p>
+							<hr>
+							<p><small>IP: ${contactData.ip_address}</small></p>
+							<p><small>Time: ${contactData.timestamp}</small></p>
+						`,
+					}),
+				});
+
+				if (!emailResponse.ok) {
+					console.error("Failed to send email:", await emailResponse.text());
+				}
+			} else {
+				console.warn("RESEND_API_KEY not configured. Email not sent.");
+			}
+		} catch (emailError) {
+			console.error("Error sending email:", emailError);
+			// Don't fail the request if email fails
+		}
 
 		console.log("Contact form submission:", contactData);
 
