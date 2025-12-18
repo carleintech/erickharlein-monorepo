@@ -39,8 +39,8 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 			<div className="space-y-4 mb-8">
 				<div className="flex items-center gap-2">
 					<Badge>{project.category.replace(/_/g, " ")}</Badge>
-					<Badge variant={project.status === "COMPLETED" ? "default" : "outline"}>
-						{project.status.replace(/_/g, " ")}
+					<Badge variant={project.status === "Live" || project.status === "Active" ? "default" : "outline"}>
+						{project.status}
 					</Badge>
 				</div>
 
