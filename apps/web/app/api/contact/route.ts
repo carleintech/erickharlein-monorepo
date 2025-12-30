@@ -5,7 +5,10 @@ import AdminNotificationEmail from "@/emails/admin-notification";
 import VisitorAutoReplyEmail from "@/emails/visitor-auto-reply";
 import { supabase } from "@/lib/supabase";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 export async function POST(request: NextRequest) {
 	try {
@@ -37,51 +40,55 @@ export async function POST(request: NextRequest) {
 			errors: [] as string[],
 		};
 
-		// Send emails (both in parallel for speed)
-		await Promise.allSettled([
-			// 1. Admin Notification - Professional template
-			resend.emails
-				.send({
-					from: process.env.FROM_EMAIL || "TechKlein <hello@erickharlein.com>",
-					to: ["erickharleinp@gmail.com"],
-					subject: `🚀 New Contact: ${validatedData.name}${validatedData.company ? ` from ${validatedData.company}` : ""}`,
-					react: AdminNotificationEmail(contactData),
-				})
-				.then((result) => {
-					emailResults.adminNotification = true;
-					emailResults.adminEmailId = result.data?.id || null;
-					console.log("✅ Admin notification sent:", result.data?.id);
-				})
-				.catch((error) => {
-					emailResults.errors.push(`Admin notification failed: ${error.message}`);
-					console.error("❌ Admin notification error:", error);
-				}),
+		// Send emails (both in parallel for speed) - only if Resend is configured
+		if (resend) {
+			await Promise.allSettled([
+				// 1. Admin Notification - Professional template
+				resend.emails
+					.send({
+						from: process.env.FROM_EMAIL || "TechKlein <hello@erickharlein.com>",
+						to: ["erickharleinp@gmail.com"],
+						subject: `🚀 New Contact: ${validatedData.name}${validatedData.company ? ` from ${validatedData.company}` : ""}`,
+						react: AdminNotificationEmail(contactData),
+					})
+					.then((result) => {
+						emailResults.adminNotification = true;
+						emailResults.adminEmailId = result.data?.id || null;
+						console.log("✅ Admin notification sent:", result.data?.id);
+					})
+					.catch((error) => {
+						emailResults.errors.push(`Admin notification failed: ${error.message}`);
+						console.error("❌ Admin notification error:", error);
+					}),
 
-			// 2. Visitor Auto-Reply - Instant trust boost
-			resend.emails
-				.send({
-					from: process.env.FROM_EMAIL || "TechKlein <hello@erickharlein.com>",
-					to: [validatedData.email],
-					subject: "Thank you for contacting TechKlein — We received your message",
-					react: VisitorAutoReplyEmail({ name: validatedData.name }),
-				})
-				.then((result) => {
-					emailResults.visitorAutoReply = true;
-					emailResults.visitorEmailId = result.data?.id || null;
-					console.log("✅ Auto-reply sent:", result.data?.id);
-				})
-				.catch((error) => {
-					emailResults.errors.push(`Auto-reply failed: ${error.message}`);
-					console.error("❌ Auto-reply error:", error);
-				}),
-		]);
+				// 2. Visitor Auto-Reply - Instant trust boost
+				resend.emails
+					.send({
+						from: process.env.FROM_EMAIL || "TechKlein <hello@erickharlein.com>",
+						to: [validatedData.email],
+						subject: "Thank you for contacting TechKlein — We received your message",
+						react: VisitorAutoReplyEmail({ name: validatedData.name }),
+					})
+					.then((result) => {
+						emailResults.visitorAutoReply = true;
+						emailResults.visitorEmailId = result.data?.id || null;
+						console.log("✅ Auto-reply sent:", result.data?.id);
+					})
+					.catch((error) => {
+						emailResults.errors.push(`Auto-reply failed: ${error.message}`);
+						console.error("❌ Auto-reply error:", error);
+					}),
+			]);
 
-		// Log email results
-		console.log("📊 Email delivery summary:", {
-			adminSent: emailResults.adminNotification,
-			autoReplySent: emailResults.visitorAutoReply,
-			errors: emailResults.errors.length,
-		});
+			// Log email results
+			console.log("📊 Email delivery summary:", {
+				adminSent: emailResults.adminNotification,
+				autoReplySent: emailResults.visitorAutoReply,
+				errors: emailResults.errors.length,
+			});
+		} else {
+			console.log("⚠️ Email service not configured - skipping notifications");
+		}
 
 		// Save to Supabase database
 		try {
