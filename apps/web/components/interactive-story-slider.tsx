@@ -33,6 +33,7 @@ const slides: StorySlide[] = [
 			"I carried with me nothing but languages, values, and the belief that adversity is a teacher."
 		],
 		image: "/images/story/haiti.png",
+		soundFile: "/images/sounds/chapters/haiti-ambient.wav",
 		gradient: "from-emerald-500 via-teal-500 to-cyan-500",
 		particleColor: "rgba(16, 185, 129, 0.3)",
 		progress: 15
@@ -50,6 +51,7 @@ const slides: StorySlide[] = [
 			"And then I chose service."
 		],
 		image: "/images/story/usa.png",
+		soundFile: "/images/sounds/chapters/usa-ambient.wav",
 		gradient: "from-blue-500 via-indigo-500 to-purple-500",
 		particleColor: "rgba(59, 130, 246, 0.3)",
 		progress: 35
@@ -67,6 +69,7 @@ const slides: StorySlide[] = [
 			"Along the way I earned certifications: Security+, ITS, CySA+, CISSP, and more."
 		],
 		image: "/images/story/navy.png",
+		soundFile: "/images/sounds/chapters/navy-ambient.wav",
 		gradient: "from-slate-600 via-blue-700 to-indigo-800",
 		particleColor: "rgba(30, 58, 138, 0.3)",
 		progress: 65
@@ -81,6 +84,7 @@ const slides: StorySlide[] = [
 			"Growth is not a phase. It is a commitment."
 		],
 		image: "/images/story/university.png",
+		soundFile: "/images/sounds/chapters/university-ambient.wav",
 		gradient: "from-purple-500 via-violet-500 to-fuchsia-500",
 		particleColor: "rgba(168, 85, 247, 0.3)",
 		progress: 80
@@ -95,6 +99,7 @@ const slides: StorySlide[] = [
 			"My work focuses on building intelligent, secure systems that respect human autonomy and strengthen decision-making in critical environments."
 		],
 		image: "/images/story/ai-cyber.png",
+		soundFile: "/images/sounds/chapters/ai-cyber-ambient.wav",
 		gradient: "from-pink-500 via-rose-500 to-red-500",
 		particleColor: "rgba(236, 72, 153, 0.3)",
 		progress: 92
@@ -111,6 +116,7 @@ const slides: StorySlide[] = [
 			"Everything I build is guided by one belief: technology must serve humanity, not replace it."
 		],
 		image: "/images/story/techklein.png",
+		soundFile: "/images/sounds/chapters/techklein-ambient.wav",
 		gradient: "from-orange-500 via-amber-500 to-yellow-500",
 		particleColor: "rgba(251, 146, 60, 0.3)",
 		progress: 100
