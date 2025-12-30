@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@erickharlein/ui";
-import { motion, useAnimation, useMotionValue, useTransform } from "framer-motion";
+import { motion, useMotionValue, useTransform, useAnimate } from "framer-motion";
 import { Home, Search, ArrowLeft, Sparkles, Zap, Ghost, Rocket } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -12,7 +12,7 @@ export default function NotFoundPage() {
 	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 	const [glitchActive, setGlitchActive] = useState(false);
 	const [score, setScore] = useState(0);
-	const controls = useAnimation();
+	const [scope, animate] = useAnimate();
 
 	// Track mouse for parallax effect
 	useEffect(() => {
@@ -53,11 +53,10 @@ export default function NotFoundPage() {
 	// Handle ghost click (easter egg game)
 	const handleGhostClick = () => {
 		setScore(score + 1);
-		controls.start({
+		animate(scope.current, {
 			scale: [1, 1.5, 1],
 			rotate: [0, 360],
-			transition: { duration: 0.5 },
-		});
+		}, { duration: 0.5 });
 	};
 
 	return (

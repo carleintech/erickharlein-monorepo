@@ -128,6 +128,7 @@ interface DialogCloseProps {
 export function DialogClose({ onClose, className }: DialogCloseProps) {
   return (
     <button
+      type="button"
       onClick={onClose}
       className={cn(
         "absolute right-6 top-6 rounded-lg p-2",

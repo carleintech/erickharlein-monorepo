@@ -17,7 +17,7 @@ interface StorySlide {
 	particleColor: string;
 	progress: number;
 	soundFile?: string;
-	atmosphere: string;
+	atmosphere?: string;
 }
 
 const slides: StorySlide[] = [

@@ -1,0 +1,172 @@
+// Prisma Schema for Project Booking System
+// Place this in your main schema.prisma file
+
+model ProjectBooking {
+  id                  String   @id @default(cuid())
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  
+  // Booking Status
+  status              BookingStatus @default(DRAFT)
+  currentStep         Int       @default(0)
+  completedSteps      Int[]
+  
+  // Step 1: Domain & Infrastructure
+  hasDomain           Boolean?
+  domainName          String?
+  currentHost         String?
+  needsDomainHelp     Boolean   @default(false)
+  needsTransferHelp   Boolean   @default(false)
+  
+  // Step 2: Project Type
+  projectTypeId       String?
+  projectTypeName     String?
+  projectTypePrice    Float     @default(0)
+  
+  // Step 3: Selected Features
+  selectedFeatures    String[]  // Array of feature IDs
+  featuresTotal       Float     @default(0)
+  
+  // Step 4: Add-Ons
+  selectedAddOns      String[]  // Array of add-on IDs
+  addOnsOneTimeTotal  Float     @default(0)
+  addOnsMonthlyTotal  Float     @default(0)
+  
+  // Step 5: Content Creation Service
+  includeContentCreation Boolean @default(false)
+  contentCreationPrice   Float   @default(0)
+  
+  // Step 6: Contact Information
+  contactName         String?
+  contactEmail        String?
+  contactPhone        String?
+  companyName         String?
+  additionalNotes     String?
+  
+  // Pricing Calculation
+  basePrice           Float     @default(0)
+  totalOneTime        Float     @default(0)
+  totalMonthly        Float     @default(0)
+  estimatedTimelineWeeks Int    @default(0)
+  
+  // Step 7: Contract Acceptance
+  contractAccepted    Boolean   @default(false)
+  contractAcceptedAt  DateTime?
+  contractVersion     String?
+  
+  // Step 8: Payment & Deposit
+  depositRequired     Float     @default(0)
+  depositPercentage   Float     @default(20) // Default 20%
+  depositPaid         Boolean   @default(false)
+  depositPaidAt       DateTime?
+  
+  // Stripe Integration
+  stripeSessionId     String?   @unique
+  stripePaymentIntentId String? @unique
+  stripeCustomerId    String?
+  
+  // Session Management
+  sessionToken        String?   @unique
+  lastAccessedAt      DateTime  @default(now())
+  expiresAt           DateTime?
+  
+  // User Tracking
+  ipAddress           String?
+  userAgent           String?
+  referrer            String?
+  
+  // Admin Notes
+  adminNotes          String?
+  assignedTo          String?
+  
+  // Email Tracking
+  confirmationEmailSent Boolean @default(false)
+  reminderEmailSent     Boolean @default(false)
+  
+  @@index([contactEmail])
+  @@index([status])
+  @@index([sessionToken])
+  @@index([createdAt])
+}
+
+enum BookingStatus {
+  DRAFT           // In progress, not submitted
+  SUBMITTED       // Submitted, awaiting deposit
+  DEPOSIT_PAID    // Deposit received
+  IN_PROGRESS     // Project in development
+  COMPLETED       // Project completed
+  CANCELLED       // Cancelled by client or admin
+  EXPIRED         // Session expired without completion
+}
+
+// Progress Tracking
+model BookingProgress {
+  id                String   @id @default(cuid())
+  bookingId         String
+  step              Int
+  stepName          String
+  completedAt       DateTime @default(now())
+  data              Json?    // Store step-specific data
+  
+  @@index([bookingId])
+}
+
+// Email Logs
+model BookingEmail {
+  id                String   @id @default(cuid())
+  bookingId         String
+  emailType         EmailType
+  recipient         String
+  subject           String
+  sentAt            DateTime @default(now())
+  delivered         Boolean  @default(false)
+  opened            Boolean  @default(false)
+  clicked           Boolean  @default(false)
+  
+  @@index([bookingId])
+  @@index([emailType])
+}
+
+enum EmailType {
+  WELCOME
+  PROGRESS_SAVED
+  QUOTE_READY
+  CONTRACT_PENDING
+  DEPOSIT_REQUEST
+  DEPOSIT_RECEIVED
+  PROJECT_STARTED
+  PROJECT_UPDATE
+  PROJECT_COMPLETED
+}
+
+// Payment Tracking
+model BookingPayment {
+  id                String   @id @default(cuid())
+  bookingId         String
+  amount            Float
+  currency          String   @default("usd")
+  paymentType       PaymentType
+  stripePaymentId   String?
+  status            PaymentStatus
+  paidAt            DateTime?
+  createdAt         DateTime @default(now())
+  
+  @@index([bookingId])
+  @@index([status])
+}
+
+enum PaymentType {
+  DEPOSIT
+  MILESTONE
+  FINAL
+  MONTHLY_RECURRING
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+  CANCELLED
+}

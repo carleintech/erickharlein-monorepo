@@ -5,12 +5,13 @@ import { type ContactFormData, contactFormSchema } from "@erickharlein/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Send, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useId } from "react";
 import { useForm } from "react-hook-form";
 
 export function ContactForm() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { toast } = useToast();
+	const formId = useId();
 
 	const {
 		register,
@@ -61,9 +62,9 @@ export function ContactForm() {
 					transition={{ delay: 0.1 }}
 					className="space-y-2"
 				>
-					<Label htmlFor="name" className="text-base font-semibold">Name *</Label>
+					<Label htmlFor={`${formId}-name`} className="text-base font-semibold">Name *</Label>
 					<Input
-						id="name"
+						id={`${formId}-name`}
 						{...register("name")}
 						placeholder="John Doe"
 						className="h-12 bg-zinc-900/50 border-zinc-800 focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 transition-all"
@@ -77,9 +78,9 @@ export function ContactForm() {
 					transition={{ delay: 0.15 }}
 					className="space-y-2"
 				>
-					<Label htmlFor="email" className="text-base font-semibold">Email *</Label>
+					<Label htmlFor={`${formId}-email`} className="text-base font-semibold">Email *</Label>
 					<Input
-						id="email"
+						id={`${formId}-email`}
 						type="email"
 						{...register("email")}
 						placeholder="john@example.com"
@@ -96,9 +97,9 @@ export function ContactForm() {
 					transition={{ delay: 0.2 }}
 					className="space-y-2"
 				>
-					<Label htmlFor="phone" className="text-base font-semibold">Phone</Label>
+					<Label htmlFor={`${formId}-phone`} className="text-base font-semibold">Phone</Label>
 					<Input
-						id="phone"
+						id={`${formId}-phone`}
 						{...register("phone")}
 						placeholder="+1 (555) 000-0000"
 						className="h-12 bg-zinc-900/50 border-zinc-800 focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 transition-all"
@@ -112,9 +113,9 @@ export function ContactForm() {
 					transition={{ delay: 0.25 }}
 					className="space-y-2"
 				>
-					<Label htmlFor="company" className="text-base font-semibold">Company</Label>
+					<Label htmlFor={`${formId}-company`} className="text-base font-semibold">Company</Label>
 					<Input
-						id="company"
+						id={`${formId}-company`}
 						{...register("company")}
 						placeholder="Your company name"
 						className="h-12 bg-zinc-900/50 border-zinc-800 focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 transition-all"
@@ -129,9 +130,9 @@ export function ContactForm() {
 				transition={{ delay: 0.3 }}
 				className="space-y-2"
 			>
-				<Label htmlFor="message" className="text-base font-semibold">Message *</Label>
+				<Label htmlFor={`${formId}-message`} className="text-base font-semibold">Message *</Label>
 				<Textarea
-					id="message"
+					id={`${formId}-message`}
 					{...register("message")}
 					placeholder="Tell me about your project or inquiry..."
 					rows={6}

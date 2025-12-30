@@ -8,7 +8,6 @@ import {
 	Building2,
 	Code2,
 	Coins,
-	ExternalLink,
 	Globe,
 	GraduationCap,
 	Heart,
@@ -23,7 +22,6 @@ import {
 	Users,
 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 
 // TECHKLEIN Division Framework

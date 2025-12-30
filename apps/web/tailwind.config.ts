@@ -53,6 +53,27 @@ const config = {
 					DEFAULT: "hsl(var(--card))",
 					foreground: "hsl(var(--card-foreground))",
 				},
+				// TechKlein Enhanced Signal Colors
+				signal: {
+					DEFAULT: "#00f5d4", // Neon mint
+					soft: "#00c2a8",    // Softer mint
+					bright: "#00ffea",  // Brighter cyan
+					glow: "rgba(0, 245, 212, 0.4)",
+					dim: "rgba(0, 245, 212, 0.15)",
+				},
+				tech: {
+					purple: "#7c3aed",      // Primary tech purple
+					indigo: "#6366f1",      // Deep blue
+					cyan: "#06b6d4",        // Tech cyan
+					pink: "#ec4899",        // Accent pink
+					blue: "#3b82f6",        // Bright blue
+					violet: "#8b5cf6",      // Soft violet
+				},
+				glass: {
+					light: "rgba(255, 255, 255, 0.1)",
+					medium: "rgba(255, 255, 255, 0.05)",
+					dark: "rgba(0, 0, 0, 0.4)",
+				},
 			},
 			borderRadius: {
 				lg: "var(--radius)",
@@ -76,12 +97,23 @@ const config = {
 					"0%": { transform: "translateX(100%)" },
 					"100%": { transform: "translateX(0)" },
 				},
+				drift: {
+					"0%": { backgroundPosition: "0% 50%" },
+					"50%": { backgroundPosition: "100% 50%" },
+					"100%": { backgroundPosition: "0% 50%" },
+				},
+				glow: {
+					"0%, 100%": { opacity: "0.5" },
+					"50%": { opacity: "1" },
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
 				"fade-in": "fade-in 0.5s ease-out",
 				"slide-in-right": "slide-in-right 0.3s ease-out",
+				drift: "drift 50s ease infinite",
+				glow: "glow 3s ease-in-out infinite",
 			},
 		},
 	},

@@ -1,10 +1,18 @@
 "use client";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@erickharlein/ui";
-import { Github, Linkedin, Mail, MapPin, MessageSquare, Phone, Send, Sparkles, Zap, Clock, Globe2 } from "lucide-react";
+import { Clock, Github, Globe2, Linkedin, Mail, MapPin, MessageSquare, Phone, Send, Sparkles, Zap } from "lucide-react";
 import { ContactForm } from "@/components/contact-form";
 import { motion } from "framer-motion";
-import Image from "next/image";
+
+// Pre-generate particle positions to avoid hydration mismatch
+const PARTICLES = Array.from({ length: 15 }, (_, i) => ({
+	id: i,
+	left: [81.62, 37.59, 11.98, 65.16, 31.75, 23.93, 91.12, 71.77, 97.47, 0.76, 69.84, 53.03, 77.29, 99.80, 96.19][i],
+	top: [40.97, 45.61, 2.71, 37.90, 10.92, 30.01, 16.18, 66.39, 12.78, 66.15, 60.13, 35.32, 63.67, 44.94, 17.56][i],
+	duration: 3 + (i % 3) * 0.5,
+	delay: (i % 4) * 0.5,
+}));
 
 export default function ContactPage() {
 	return (
@@ -43,22 +51,22 @@ export default function ContactPage() {
 				/>
 				
 				{/* Floating Particles */}
-				{Array.from({ length: 15 }).map((_, i) => (
+				{PARTICLES.map((particle) => (
 					<motion.div
-						key={i}
+						key={particle.id}
 						className="absolute w-1 h-1 rounded-full bg-blue-400/30"
 						style={{
-							left: `${Math.random() * 100}%`,
-							top: `${Math.random() * 100}%`,
+							left: `${particle.left}%`,
+							top: `${particle.top}%`,
 						}}
 						animate={{
 							y: [0, -30, 0],
 							opacity: [0.3, 0.8, 0.3],
 						}}
 						transition={{
-							duration: 3 + Math.random() * 2,
+							duration: particle.duration,
 							repeat: Infinity,
-							delay: Math.random() * 2,
+							delay: particle.delay,
 						}}
 					/>
 				))}

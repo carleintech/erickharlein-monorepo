@@ -12,6 +12,15 @@ export function formatNumber(num: number): string {
 	return new Intl.NumberFormat("en-US").format(num);
 }
 
+export function formatPrice(amount: number): string {
+	return new Intl.NumberFormat("en-US", {
+		style: "currency",
+		currency: "USD",
+		minimumFractionDigits: 0,
+		maximumFractionDigits: 0,
+	}).format(amount);
+}
+
 export function truncate(str: string, length: number): string {
 	return str.length > length ? `${str.substring(0, length)}...` : str;
 }
