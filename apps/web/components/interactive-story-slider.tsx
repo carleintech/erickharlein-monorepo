@@ -126,7 +126,7 @@ const slides: StorySlide[] = [
 export function InteractiveStorySlider() {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [isAutoPlay, setIsAutoPlay] = useState(false);
-	const [isSoundEnabled, setIsSoundEnabled] = useState(true);
+	const [isSoundEnabled, setIsSoundEnabled] = useState(false);
 	const [direction, setDirection] = useState(0);
 	const [completedSlides, setCompletedSlides] = useState<number[]>([]);
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -275,7 +275,7 @@ export function InteractiveStorySlider() {
 	return (
 		<div 
 			ref={containerRef} 
-			className="relative w-full min-h-screen overflow-hidden"
+			className="relative w-full min-h-screen overflow-x-hidden"
 			onTouchStart={handleTouchStart}
 			onTouchMove={handleTouchMove}
 			onTouchEnd={handleTouchEnd}
@@ -318,8 +318,8 @@ export function InteractiveStorySlider() {
 
 			{/* Main Content Container */}
 			<div className="relative z-10 w-full min-h-screen flex items-center">
-				<div className="container mx-auto px-4 py-20">
-					<div className="grid lg:grid-cols-2 gap-12 items-center">
+				<div className="container mx-auto px-4 py-12 md:py-20">
+					<div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
 						{/* Photo Section */}
 						<AnimatePresence mode="wait" custom={direction}>
 							<motion.div
@@ -343,12 +343,13 @@ export function InteractiveStorySlider() {
 									<motion.div
 										whileHover={{ scale: 1.05, rotateY: 5 }}
 										transition={{ type: "spring", stiffness: 300 }}
-										className="relative aspect-[3/4] rounded-3xl overflow-hidden border-2 border-white/20 backdrop-blur-xl shadow-2xl"
+										className="relative aspect-[4/3] md:aspect-[3/4] rounded-3xl overflow-hidden border-2 border-white/20 backdrop-blur-xl shadow-2xl"
 									>
 										<Image
 											src={currentStory.image}
 											alt={currentStory.subtitle}
 											fill
+											sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
 											className="object-cover"
 											priority
 										/>
@@ -378,7 +379,7 @@ export function InteractiveStorySlider() {
 									x: { type: "spring", stiffness: 300, damping: 30 },
 									opacity: { duration: 0.5 }
 								}}
-								className="space-y-8 p-8 rounded-3xl bg-slate-900/50 backdrop-blur-2xl border border-white/10"
+								className="space-y-6 md:space-y-8 p-6 md:p-8 rounded-3xl bg-slate-900/50 backdrop-blur-2xl border border-white/10"
 							>
 								{/* Emoji + Subtitle */}
 								<motion.div
@@ -396,7 +397,7 @@ export function InteractiveStorySlider() {
 									initial={{ opacity: 0, y: 20 }}
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ delay: 0.4 }}
-									className={`text-5xl md:text-6xl font-black bg-gradient-to-r ${currentStory.gradient} bg-clip-text text-transparent leading-tight drop-shadow-2xl`}
+									className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r ${currentStory.gradient} bg-clip-text text-transparent leading-tight drop-shadow-2xl`}
 									style={{ textShadow: "0 0 40px rgba(0,0,0,0.5)" }}
 								>
 									{currentStory.title}
