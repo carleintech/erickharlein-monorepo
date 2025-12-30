@@ -1,12 +1,19 @@
 import Stripe from "stripe";
 import { type NextRequest, NextResponse } from "next/server";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY!, {
 	apiVersion: "2025-12-15.clover",
-});
+}) : null;
 
 export async function POST(req: NextRequest) {
 	try {
+		if (!stripe) {
+			return NextResponse.json({ error: "Payment system not configured" }, { status: 503 });
+		}
+
 		const { bookingData } = await req.json();
 
 		if (!bookingData) {

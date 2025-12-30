@@ -1,18 +1,23 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 
-export const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+export const supabase = (supabaseUrl && supabaseServiceKey) ? createClient(supabaseUrl, supabaseServiceKey, {
   auth: {
     autoRefreshToken: false,
     persistSession: false,
   },
-});
+}) : null;
 
 export const supabaseClient = (accessToken?: string) => {
+  if (!supabaseUrl) return null;
+  
   if (accessToken) {
-    return createClient(supabaseUrl, supabaseServiceKey, {
+    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+    if (!serviceKey) return null;
+    
+    return createClient(supabaseUrl, serviceKey, {
       global: {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -21,8 +26,8 @@ export const supabaseClient = (accessToken?: string) => {
     });
   }
   
-  return createClient(
-    supabaseUrl,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+  if (!anonKey) return null;
+  
+  return createClient(supabaseUrl, anonKey);
 };

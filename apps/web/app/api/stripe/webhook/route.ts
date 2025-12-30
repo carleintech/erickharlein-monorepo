@@ -6,13 +6,20 @@ import { render } from "@react-email/render";
 import { BookingConfirmationEmail } from "@/emails/booking-confirmation";
 import { supabase } from "@/lib/supabase";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY, {
 	apiVersion: "2025-12-15.clover",
-});
+}) : null;
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 export async function POST(req: NextRequest) {
+	if (!stripe) {
+		return NextResponse.json({ error: "Payment system not configured" }, { status: 503 });
+	}
+	
 	const body = await req.text();
 	const headersList = await headers();
 	const signature = headersList.get("stripe-signature");
@@ -45,39 +52,44 @@ export async function POST(req: NextRequest) {
 		// Save booking to database
 		let bookingEmailId: string | null = null;
 
-		try {
-			const monthlyAmount = session.metadata?.monthly_amount
-				? Number(session.metadata.monthly_amount)
-				: undefined;
+		// Save to database (optional - only if Supabase is configured)
+		if (supabase) {
+			try {
+				const monthlyAmount = session.metadata?.monthly_amount
+					? Number(session.metadata.monthly_amount)
+					: undefined;
 
-			const { error: dbError } = await supabase
-				.from("booking_submissions")
-				.insert({
-					service_name: session.metadata?.project_type || "Custom Project",
-					service_type: session.metadata?.service_type || "project",
-					stripe_session_id: session.id,
-					stripe_payment_intent_id: session.payment_intent as string | null,
-					payment_status: session.payment_status || "unpaid",
-					booking_status: "pending",
-					amount_total: session.amount_total || 0,
-					currency: session.currency || "usd",
-					client_name: session.metadata?.contact_name || session.customer_details?.name || null,
-					client_email: session.customer_email || session.customer_details?.email || null,
-					client_phone: session.metadata?.contact_phone || null,
-					client_company: session.metadata?.contact_company || null,
-					timeline_weeks: session.metadata?.timeline_weeks ? Number(session.metadata.timeline_weeks) : null,
-					deposit_percentage: session.metadata?.deposit_percentage ? Number(session.metadata.deposit_percentage) : null,
-					monthly_amount: monthlyAmount || null,
-					metadata: session.metadata as Record<string, string>,
-				});
+				const { error: dbError } = await supabase
+					.from("booking_submissions")
+					.insert({
+						service_name: session.metadata?.project_type || "Custom Project",
+						service_type: session.metadata?.service_type || "project",
+						stripe_session_id: session.id,
+						stripe_payment_intent_id: session.payment_intent as string | null,
+						payment_status: session.payment_status || "unpaid",
+						booking_status: "pending",
+						amount_total: session.amount_total || 0,
+						currency: session.currency || "usd",
+						client_name: session.metadata?.contact_name || session.customer_details?.name || null,
+						client_email: session.customer_email || session.customer_details?.email || null,
+						client_phone: session.metadata?.contact_phone || null,
+						client_company: session.metadata?.contact_company || null,
+						timeline_weeks: session.metadata?.timeline_weeks ? Number(session.metadata.timeline_weeks) : null,
+						deposit_percentage: session.metadata?.deposit_percentage ? Number(session.metadata.deposit_percentage) : null,
+						monthly_amount: monthlyAmount || null,
+						metadata: session.metadata as Record<string, string>,
+					});
 
-			if (dbError) {
-				console.error("❌ Database save failed:", dbError);
-			} else {
-				console.log("✅ Booking saved to database");
+				if (dbError) {
+					console.error("❌ Database save failed:", dbError);
+				} else {
+					console.log("✅ Booking saved to database");
+				}
+			} catch (dbError) {
+				console.error("❌ Database error:", dbError);
 			}
-		} catch (dbError) {
-			console.error("❌ Database error:", dbError);
+		} else {
+			console.log("⚠️ Database not configured - skipping booking save");
 		}
 
 		// Send confirmation email using Resend
@@ -118,17 +130,19 @@ export async function POST(req: NextRequest) {
 					bookingEmailId = data?.id || null;
 					console.log("✅ Confirmation email sent:", data?.id);
 
-					// Update booking record with email status
-					try {
-						await supabase
-							.from("booking_submissions")
-							.update({
-								booking_email_sent: true,
-								booking_email_id: bookingEmailId,
-							})
-							.eq("stripe_session_id", session.id);
-					} catch (updateError) {
-						console.error("❌ Failed to update email status:", updateError);
+					// Update booking record with email status (only if Supabase is configured)
+					if (supabase) {
+						try {
+							await supabase
+								.from("booking_submissions")
+								.update({
+									booking_email_sent: true,
+									booking_email_id: bookingEmailId,
+								})
+								.eq("stripe_session_id", session.id);
+						} catch (updateError) {
+							console.error("❌ Failed to update email status:", updateError);
+						}
 					}
 				}
 			} catch (emailError) {

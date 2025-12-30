@@ -85,29 +85,33 @@ export async function POST(request: NextRequest) {
 
 		// Save to Supabase database
 		try {
-			const { error: dbError } = await supabase
-				.from("contact_submissions")
-				.insert({
-					name: validatedData.name,
-					email: validatedData.email,
-					phone: validatedData.phone || null,
-					company: validatedData.company || null,
-					message: validatedData.message,
-					ip_address: contactData.ip_address,
-					user_agent: contactData.user_agent,
-					referrer: request.headers.get("referer") || null,
-					admin_email_sent: emailResults.adminNotification,
-					visitor_email_sent: emailResults.visitorAutoReply,
-					admin_email_id: emailResults.adminEmailId,
-					visitor_email_id: emailResults.visitorEmailId,
-					status: "new",
-				});
+			if (supabase) {
+				const { error: dbError } = await supabase
+					.from("contact_submissions")
+					.insert({
+						name: validatedData.name,
+						email: validatedData.email,
+						phone: validatedData.phone || null,
+						company: validatedData.company || null,
+						message: validatedData.message,
+						ip_address: contactData.ip_address,
+						user_agent: contactData.user_agent,
+						referrer: request.headers.get("referer") || null,
+						admin_email_sent: emailResults.adminNotification,
+						visitor_email_sent: emailResults.visitorAutoReply,
+						admin_email_id: emailResults.adminEmailId,
+						visitor_email_id: emailResults.visitorEmailId,
+						status: "new",
+					});
 
-			if (dbError) {
-				console.error("❌ Database save failed:", dbError);
-				// Don't fail the request - email was sent successfully
+				if (dbError) {
+					console.error("❌ Database save failed:", dbError);
+					// Don't fail the request - email was sent successfully
+				} else {
+					console.log("✅ Contact saved to database");
+				}
 			} else {
-				console.log("✅ Contact saved to database");
+				console.log("⚠️ Database not configured - skipping save");
 			}
 		} catch (dbError) {
 			console.error("❌ Database error:", dbError);
