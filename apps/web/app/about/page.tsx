@@ -126,7 +126,7 @@ export default function AboutPage() {
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							transition={{ delay: 0.5 }}
-							className="text-2xl md:text-3xl text-slate-300 max-w-4xl mx-auto leading-relaxed"
+						className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-slate-300 max-w-4xl mx-auto leading-relaxed px-4"
 						>
 							But everyone calls me{" "}
 							<motion.span 
@@ -188,17 +188,17 @@ export default function AboutPage() {
 							
 							<div className="relative z-10 text-center space-y-4">
 								<motion.p 
-									className="text-3xl md:text-4xl font-black"
-									initial={{ opacity: 0, y: 20 }}
-									whileInView={{ opacity: 1, y: 0 }}
-									viewport={{ once: true }}
-								>
-									<span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-										I don't build products.
-									</span>
-								</motion.p>
-								<motion.p 
-									className="text-3xl md:text-4xl font-black text-white"
+								className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black px-4"
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true }}
+							>
+								<span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+									I don't build products.
+								</span>
+							</motion.p>
+							<motion.p 
+								className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white px-4"
 									initial={{ opacity: 0, y: 20 }}
 									whileInView={{ opacity: 1, y: 0 }}
 									viewport={{ once: true }}
