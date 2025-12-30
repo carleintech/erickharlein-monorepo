@@ -343,14 +343,14 @@ export function InteractiveStorySlider() {
 									<motion.div
 										whileHover={{ scale: 1.05, rotateY: 5 }}
 										transition={{ type: "spring", stiffness: 300 }}
-									className="relative w-full min-h-[400px] md:min-h-[500px] aspect-[4/3] md:aspect-[3/4] rounded-3xl overflow-hidden border-2 border-white/20 backdrop-blur-xl shadow-2xl"
+									className="relative w-full min-h-[500px] aspect-[3/4] md:aspect-[3/4] rounded-3xl overflow-hidden border-2 border-white/20 backdrop-blur-xl shadow-2xl"
 									>
 										<Image
 											src={currentStory.image}
 											alt={currentStory.subtitle}
 											fill
 											sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
-											className="object-cover"
+											className="object-cover object-top"
 											priority
 										/>
 										
