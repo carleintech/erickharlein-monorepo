@@ -5,6 +5,7 @@ import { Code2, Coffee, Globe, GraduationCap, Heart, Music, Plane, Shield, Arrow
 import Image from "next/image";
 import Link from "next/link";
 import { InteractiveStorySlider } from "@/components/interactive-story-slider";
+import { CertificationsSection } from "@/components/certifications-section";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 
@@ -570,8 +571,8 @@ export default function AboutPage() {
 							},
 							{
 								icon: Code2,
-								title: "Technical Background",
-								desc: "8+ years building intelligent systems. CompTIA Security+ certified, currently pursuing CC and CISSP. Full-stack engineering (TypeScript, React, Next.js, Node.js), cloud architecture (AWS, Azure, GCP), AI/ML development (Python, TensorFlow), and cybersecurity. Trilingual: English, French, Haitian Creole.",
+							title: "Technical Background & Certifications",
+							desc: "8+ years building intelligent systems. Certified: CompTIA Security+ ce, CompTIA CySA+ ce, CompTIA Security Analytics Professional (CSAP), and ETA Information Technology Security (all valid through 2029). Full-stack engineering (TypeScript, React, Next.js, Node.js), cloud architecture (AWS, Azure, GCP), AI/ML development (Python, TensorFlow), and cybersecurity. Trilingual: English, French, Haitian Creole.",
 								gradient: "from-cyan-500 to-indigo-500"
 							}
 						].map((item, i) => (
@@ -595,6 +596,9 @@ export default function AboutPage() {
 						))}
 					</div>
 				</motion.div>
+
+				{/* Certifications Section */}
+				<CertificationsSection />
 
 				{/* Beyond Work - Grid */}
 				<motion.div

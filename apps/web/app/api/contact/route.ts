@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import AdminNotificationEmail from "@/emails/admin-notification";
 import VisitorAutoReplyEmail from "@/emails/visitor-auto-reply";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -92,6 +92,7 @@ export async function POST(request: NextRequest) {
 
 		// Save to Supabase database
 		try {
+			const supabase = getSupabase();
 			if (supabase) {
 				const { error: dbError } = await supabase
 					.from("contact_submissions")
@@ -109,7 +110,7 @@ export async function POST(request: NextRequest) {
 						admin_email_id: emailResults.adminEmailId,
 						visitor_email_id: emailResults.visitorEmailId,
 						status: "new",
-					});
+					} as any);
 
 				if (dbError) {
 					console.error("❌ Database save failed:", dbError);

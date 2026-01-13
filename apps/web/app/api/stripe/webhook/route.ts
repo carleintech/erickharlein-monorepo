@@ -4,7 +4,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { render } from "@react-email/render";
 import { BookingConfirmationEmail } from "@/emails/booking-confirmation";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -53,6 +53,7 @@ export async function POST(req: NextRequest) {
 		let bookingEmailId: string | null = null;
 
 		// Save to database (optional - only if Supabase is configured)
+		const supabase = getSupabase();
 		if (supabase) {
 			try {
 				const monthlyAmount = session.metadata?.monthly_amount
@@ -78,7 +79,7 @@ export async function POST(req: NextRequest) {
 						deposit_percentage: session.metadata?.deposit_percentage ? Number(session.metadata.deposit_percentage) : null,
 						monthly_amount: monthlyAmount || null,
 						metadata: session.metadata as Record<string, string>,
-					});
+					} as any);
 
 				if (dbError) {
 					console.error("❌ Database save failed:", dbError);
@@ -131,6 +132,7 @@ export async function POST(req: NextRequest) {
 					console.log("✅ Confirmation email sent:", data?.id);
 
 					// Update booking record with email status (only if Supabase is configured)
+					const supabase = getSupabase();
 					if (supabase) {
 						try {
 							await supabase
@@ -138,7 +140,7 @@ export async function POST(req: NextRequest) {
 								.update({
 									booking_email_sent: true,
 									booking_email_id: bookingEmailId,
-								})
+								} as any)
 								.eq("stripe_session_id", session.id);
 						} catch (updateError) {
 							console.error("❌ Failed to update email status:", updateError);

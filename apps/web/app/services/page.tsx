@@ -21,6 +21,7 @@ import {
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { AuthoritySection } from "@/components/authority-section";
 
 const services = [
 	{
@@ -412,6 +413,24 @@ export default function ServicesPage() {
 							</p>
 						</CardContent>
 					</Card>
+				</motion.div>
+
+				{/* Authority Section - Show Certifications */}
+				<motion.div
+					initial={{ opacity: 0, y: 50 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true }}
+					className="max-w-2xl mx-auto mb-20"
+				>
+					<div className="text-center mb-8">
+						<h2 className="text-3xl md:text-4xl font-black mb-4 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
+							Certified Security Professional
+						</h2>
+						<p className="text-muted-foreground">
+							Industry-recognized cybersecurity certifications backing every project
+						</p>
+					</div>
+					<AuthoritySection />
 				</motion.div>
 			</div>
 		</div>

@@ -22,42 +22,46 @@ export function HeroSection() {
 	const [isMounted, setIsMounted] = useState(false);
 
 	useEffect(() => {
+		// Mark as mounted
 		setIsMounted(true);
 
-		let titleInterval: NodeJS.Timeout;
-		let taglineInterval: NodeJS.Timeout;
-
-		// Delay start to avoid Strict Mode double renders
-		const startTimer = setTimeout(() => {
-			titleInterval = setInterval(() => {
+		// Wait for mount to complete before starting animations
+		const mountDelay = setTimeout(() => {
+			const titleInterval = setInterval(() => {
 				setTitleIndex((prev) => (prev + 1) % titles.length);
 			}, 3500);
 
-			taglineInterval = setInterval(() => {
+			const taglineInterval = setInterval(() => {
 				setTaglineIndex((prev) => (prev + 1) % taglines.length);
 			}, 5500);
-		}, 100);
+
+			return () => {
+				clearInterval(titleInterval);
+				clearInterval(taglineInterval);
+			};
+		}, 500);
 
 		return () => {
-			clearTimeout(startTimer);
-			if (titleInterval) clearInterval(titleInterval);
-			if (taglineInterval) clearInterval(taglineInterval);
+			clearTimeout(mountDelay);
 		};
 	}, []);
 
 	return (
 		<section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-background/95">
 			{/* TechKlein Logo Background - Faded */}
-			<div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
-				<Image
-					src="/images/techklein-logo.png"
-					alt="TechKlein"
-					width={800}
-					height={800}
-					className="object-contain"
-					priority
-				/>
-			</div>
+			{isMounted && (
+				<div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
+					<Image
+						src="/images/techklein-logo.png"
+						alt="TechKlein"
+						width={800}
+						height={800}
+						className="object-contain"
+						priority={false}
+						loading="lazy"
+					/>
+				</div>
+			)}
 
 			{/* Grid Pattern Background */}
 			<div className="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
@@ -95,10 +99,10 @@ export function HeroSection() {
 
 			{/* Floating Particles - Only render on client to avoid hydration issues */}
 			{isMounted && (
-				<div className="absolute inset-0">
+				<div className="absolute inset-0 pointer-events-none">
 					{[...Array(20)].map((_, i) => (
 						<motion.div
-							key={i}
+							key={`particle-${i}`}
 							className="absolute w-1 h-1 bg-primary/30 rounded-full"
 							style={{
 								left: `${Math.random() * 100}%`,
@@ -207,9 +211,9 @@ export function HeroSection() {
 						className="flex flex-wrap justify-center gap-8 md:gap-16 pt-8"
 					>
 						{[
-							{ value: "8+", label: "Years Experience", icon: "🎯" },
-							{ value: "50+", label: "Projects Delivered", icon: "🚀" },
-							{ value: "100%", label: "Client Satisfaction", icon: "⭐" },
+						{ value: "4", label: "Active Certifications", icon: "🛡️" },
+						{ value: "8+", label: "Years Experience", icon: "🎯" },
+						{ value: "50+", label: "Projects Delivered", icon: "🚀" },
 						].map((stat, idx) => (
 							<motion.div
 								key={stat.label}

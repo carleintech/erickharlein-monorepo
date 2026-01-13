@@ -1,14 +1,39 @@
 "use client";
 
 import { Card, CardContent } from "@erickharlein/ui";
-import { Shield, Code, Zap, Award, CheckCircle } from "lucide-react";
+import { Shield, Code, Award, CheckCircle } from "lucide-react";
+import Image from "next/image";
 
 export function AuthoritySection() {
 	const credentials = [
-		{ icon: Shield, text: "8+ Years Cybersecurity", color: "text-blue-400" },
-		{ icon: Code, text: "100+ Features Deployed", color: "text-purple-400" },
-		{ icon: Zap, text: "High-Security Architecture", color: "text-orange-400" },
-		{ icon: Award, text: "Custom Systems Expert", color: "text-green-400" },
+		{ 
+			icon: Shield, 
+			text: "CompTIA CySA+ ce Certified", 
+			color: "text-blue-400", 
+			expires: "Valid through 2029",
+			logo: "/images/certifications/cysa-plus/CySA+-png.png"
+		},
+		{ 
+			icon: Award, 
+			text: "CompTIA Security+ ce Certified", 
+			color: "text-green-400", 
+			expires: "Valid through 2029",
+			logo: "/images/certifications/security-plus/Security+-png.png"
+		},
+		{ 
+			icon: Shield, 
+			text: "CSAP Stackable Certification", 
+			color: "text-purple-400", 
+			expires: "Valid through 2029",
+			logo: "/images/certifications/cysa-plus/CySA+-png.png"
+		},
+		{ 
+			icon: Code, 
+			text: "IT Security Certified (ETA)", 
+			color: "text-orange-400", 
+			expires: "Valid through 2029",
+			logo: "/images/certifications/ITS/ITS.png"
+		},
 	];
 
 	return (
@@ -31,11 +56,22 @@ export function AuthoritySection() {
 				{/* Credentials */}
 				<div className="space-y-3 mb-4">
 					{credentials.map((cred, index) => (
-						<div key={index} className="flex items-center gap-3">
-							<div className={`p-2 rounded-lg bg-background/50 ${cred.color}`}>
+						<div key={index} className="flex items-start gap-3">
+						{cred.logo ? (
+							<div className="w-10 h-10 relative flex items-center justify-center bg-white rounded-lg p-1.5 flex-shrink-0">
+								<Image
+									src={cred.logo}
+									alt={`${cred.text} logo`}
+									width={40}
+									height={40}
+									className="object-contain"
+								/>
+							</div>
+						) : (
+							<div className={`p-2 rounded-lg bg-background/50 ${cred.color} mt-0.5`}>
 								<cred.icon className="h-4 w-4" />
 							</div>
-							<p className="text-sm font-medium">{cred.text}</p>
+						)}
 						</div>
 					))}
 				</div>
